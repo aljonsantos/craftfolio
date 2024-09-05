@@ -12,8 +12,10 @@ const Editor = () => {
 
   return (
     <div className="editor">
-      <Header />
-      <Previewer content={content} />
+      <div className="main-wrapper">
+        <Header />
+        <Previewer content={content} />
+      </div>
       <EditorPanel content={content} onContentChange={handleChange} />
     </div>
   )
