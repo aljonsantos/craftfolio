@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --h-header: 89px
+  --h-panel-header: 56px;
+}
+
+.header {
+  height: 82px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.previewer {
+  height: calc(100vh - (82px + 56px));
+  position: relative;
+  top: 82px;
+}
+
+.editor-panel {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(calc(100% - 56px));
+}
+
+.editor-panel.open {
+  transform: translateY(0);
+}
+
+.editor-panel button.toggle svg {
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+}
+
+svg.flip {
+  transform: rotateX(180deg);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

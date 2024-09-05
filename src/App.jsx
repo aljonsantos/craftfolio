@@ -22,10 +22,12 @@ const App = () => {
   const [content, setContent] = useLocalStorageState('content', { value: 'hello world' })
 
   return (
-    <Routes>
-      <Route path="/" element={<Editor />} />
-      <Route path="/preview" element={<Preview content={content} />} />
-    </Routes>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Editor content={content} />} />
+        <Route path="/preview" element={<Preview content={content} />} />
+      </Routes>
+    </div>
   )
 }
 

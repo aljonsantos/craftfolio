@@ -1,19 +1,20 @@
 import { useLocalStorageState } from "../App"
-import Preview from "./Preview"
+import Header from './Header'
+import Previewer from "./Previewer"
+import EditorPanel from "./EditorPanel"
 
 const Editor = () => {
-  const [content, setContent] = useLocalStorageState('content')
+  const [content, setContent] = useLocalStorageState('content', { value: 'hello world' })
 
   const handleChange = (e) => {
     setContent({ value: e.target.value })
   }
 
   return (
-    <div>
-      <h1>Editor</h1>
-      <input type="text" value={content.value} onChange={handleChange} />
-      <Preview content={content} />
-      <a href="/preview" target="_blank">Preview in new tab</a>
+    <div className="editor">
+      <Header />
+      <Previewer content={content} />
+      <EditorPanel content={content} onContentChange={handleChange} />
     </div>
   )
 }
