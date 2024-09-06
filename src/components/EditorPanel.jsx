@@ -1,13 +1,14 @@
 import { useState } from 'react'
+import useLocalStorageState from '../hooks/useLocalStorageState'
 
-const EditorPanel = ({ content, onContentChange }) => {
+const EditorPanel = () => {
+  const [content, setContent] = useLocalStorageState('content', { value: 'hello world' })
   const [open, setOpen] = useState(false)
-
-  // if (open) {
-  //   document.body.style.overflow = 'hidden'
-  // } else {
-  //   document.body.style.overflow = 'auto'
-  // }
+  
+  const handleChange = (e) => {
+    setContent({ value: e.target.value })
+    document.getElementById('previewer').contentWindow.location.reload()
+  }
 
   return (
     <>
@@ -22,7 +23,7 @@ const EditorPanel = ({ content, onContentChange }) => {
           </button>
         </div>
         <div className='panel-body overflow-y-scroll'>
-          {/* <input type="text" value={content.value} onChange={onContentChange} /> */}
+          {/* <input type="text" value={content.value} onChange={handleChange} /> */}
         </div>
       </div>
     </>
