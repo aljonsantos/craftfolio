@@ -31,13 +31,14 @@
   transform: translateY(0);
 }
 
-.editor-panel button.toggle svg {
+.editor-panel button.toggle svg,
+.editor-panel .collapsible button svg {
   transform-style: preserve-3d;
   transition: transform 0.3s;
 }
 
 .panel-body {
-  max-height: 60vh;
+  max-height: 70vh;
 }
 
 svg.flip {
@@ -51,13 +52,13 @@ svg.flip {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #f1f1f1;
   border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #dbdbdb;
 }
 
 @media (min-width: 1024px) {
@@ -74,10 +75,8 @@ svg.flip {
 
   .editor-panel {
     transform: none;
-    /* transform: translateY(calc(100% - 56px)); */
     top: 129px;
     left: 0px;
-    /* transform: translateY(-50%); */
     height: min-content;
     max-height: calc(100vh - 180px);
   }
