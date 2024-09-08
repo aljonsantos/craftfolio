@@ -1,11 +1,11 @@
-import useLocalStorageState from "../hooks/useLocalStorageState"
+import useContentState from "../hooks/useContentState"
 
 const Preview = () => {
-  const [content, setContent] = useLocalStorageState('content', { value: 'hello world' })
+  const [content, setContent] = useContentState()
 
   return (
     <div>
-      {/* <p>{content.value}</p> */}
+      <p>{content.value}</p>
     </div>
   )
 }
