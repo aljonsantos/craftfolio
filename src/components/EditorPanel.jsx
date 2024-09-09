@@ -50,77 +50,75 @@ const Collapsible = ({ headerEl, toggleLabel, children }) => {
   )
 }
 
+// Utility function to update nested state
+const updateState = (obj, keys, value) => {
+  const [key, ...rest] = keys.split('.')
+
+  if (rest.length === 0) {
+    return {
+      ...obj,
+      [key]: value
+    }
+  }
+
+  return {
+    ...obj,
+    [key]: updateState(obj[key], rest.join('.'), value)
+  }
+}
+
+const editorInputs = {
+  pageType: [
+    { id: 'single', value: 'single', label: 'Single Page' },
+    { id: 'multi', value: 'multi', label: 'Multi Page' }
+  ],
+  aboutSections: [
+    { id: 'education', value: 'education', label: 'Education' },
+    { id: 'experience', value: 'experience', label: 'Experience' },
+    { id: 'tech-skills', value: 'tech-skills', label: 'Technical Skills' },
+    { id: 'soft-skills', value: 'soft-skills', label: 'Soft Skills' },
+    { id: 'certs', value: 'certs', label: 'Certifications' }
+  ],
+  layouts: {
+    projects: [
+      { id: 'lay-ls-projects', value: 'list', label: 'List' },
+      { id: 'lay-ca-projects', value: 'cards', label: 'Cards' }
+    ],
+    blog: [
+      { id: 'lay-ls-blog', value: 'list', label: 'List' },
+      { id: 'lay-ca-blog', value: 'cards', label: 'Cards' }
+    ]
+  }
+}
+
 const EditorPanel = () => {
   const [content, setContent] = useContentState()
   const [open, setOpen] = useState(false)
   
-  // const handleChange = (e) => {
-  //   console.log(e.target.value)
-  //   document.getElementById('previewer').contentWindow.location.reload()
-  // }
-
-  const reloadPreview = () => {
+  const handleChange = (key, value) => {
+    setContent(updateState(content, key, value))
     document.getElementById('previewer').contentWindow.location.reload()
   }
 
   const handlePageTypeChange = (e) => {
-    setContent({
-      ...content,
-      page: e.target.value
-    })
-
-    reloadPreview()
+    handleChange('page', e.target.value)
   }
 
   const handlePageChange = (e) => {
     const { name, checked } = e.target
-    setContent({
-      ...content,
-      pages: {
-        ...content.pages,
-        [name]: {
-          ...content.pages[name],
-          enabled: checked
-        }
-      }
-    })
-
-    reloadPreview()
+    handleChange(`pages.${name}.enabled`, checked)
   }
 
   const handleAboutSectionChange = (e) => {
     const { checked, value } = e.target
     const { sections } = content.pages.about
     const updatedSections = checked ? [...sections, value] : sections.filter(section => section !== value)
-
-    setContent({
-      ...content,
-      pages: {
-        ...content.pages,
-        about: {
-          ...content.pages.about,
-          sections: updatedSections
-        }
-      }
-    })
-
-    reloadPreview()
+    handleChange('pages.about.sections', updatedSections)
   }
 
   const handleLayoutChange = (e) => {
     const { name, value } = e.target
-    setContent({
-      ...content,
-      pages: {
-        ...content.pages,
-        [name]: {
-          ...content.pages[name],
-          layout: value
-        }
-      }
-    })
-
-    reloadPreview()
+    handleChange(`pages.${name}.layout`, value)
   }
 
   // console.log(content)
@@ -141,27 +139,28 @@ const EditorPanel = () => {
           <div className="section py-4 px-5 pr-3 lg:pl-8 border-b">
             <h3 className="text-zinc-400 font-semibold uppercase mb-5">Navigation</h3>
             <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
-              <Radio id="single" name="page" value="single" label="Single Page" isChecked={content.page === 'single'} onChange={handlePageTypeChange} />
-              <Radio id="multi" name="page" value="multi" label="Multi Page" isChecked={content.page === 'multi'} onChange={handlePageTypeChange} />
+              {editorInputs.pageType.map(input => (
+                <Radio key={input.id} id={input.id} name="page" value={input.value} label={input.label} isChecked={content.page === input.id} onChange={handlePageTypeChange} />
+              ))}
             </div>
           </div>
           <div className="section py-4 px-5 pr-3 lg:pl-8 ">
             <h3 className="text-zinc-400 font-semibold uppercase mb-5">Pages & Layout</h3>
             <div className="section-body flex flex-col gap-4">
               <Collapsible headerEl={<Checkbox id="about" name="about" value="about" label="About" isChecked={true} isDisabled={true} />} toggleLabel="sections" >
-                <Checkbox id="education" name="education" value="education" label="Education" isChecked={content.pages.about.sections.includes('education')} onChange={handleAboutSectionChange} indent={1} />
-                <Checkbox id="experience" name="experience" value="experience" label="Experience" isChecked={content.pages.about.sections.includes('experience')} onChange={handleAboutSectionChange} indent={1} />
-                <Checkbox id="tskills" name="tskills" value="tech-skills" label="Technical Skills" isChecked={content.pages.about.sections.includes('tech-skills')} onChange={handleAboutSectionChange} indent={1} />
-                <Checkbox id="sskills" name="sskills" value="soft-skills" label="Soft Skills" isChecked={content.pages.about.sections.includes('soft-skills')} onChange={handleAboutSectionChange} indent={1} />
-                <Checkbox id="certs" name="certs" value="certs" label="Certifications" isChecked={content.pages.about.sections.includes('certs')} onChange={handleAboutSectionChange} indent={1} />
+                {editorInputs.aboutSections.map(input => (
+                  <Checkbox key={input.id} id={input.id} name={input.id} value={input.value} label={input.label} isChecked={content.pages.about.sections.includes(input.id)} onChange={handleAboutSectionChange} indent={1} />
+                ))}
               </Collapsible>
               <Collapsible headerEl={<Checkbox id="projects" name="projects" value="projects" label="Projects" isChecked={content.pages.projects.enabled} onChange={handlePageChange} />} toggleLabel="layout" >
-                <Radio id="lay-ls-projects" name="projects" value="list" label="List" isChecked={content.pages.projects.layout === 'list'} onChange={handleLayoutChange} indent={1} />
-                <Radio id="lay-ca-projects" name="projects" value="cards" label="Cards" isChecked={content.pages.projects.layout === 'cards'} onChange={handleLayoutChange} indent={1} />
+                {editorInputs.layouts.projects.map(input => (
+                  <Radio key={input.id} id={input.id} name="projects" value={input.value} label={input.label} isChecked={content.pages.projects.layout === input.value} onChange={handleLayoutChange} indent={1} />
+                ))}
               </Collapsible>
               <Collapsible headerEl={<Checkbox id="blog" name="blog" value="blog" label="Blog" isChecked={content.pages.blog.enabled} onChange={handlePageChange} />} toggleLabel="layout" >
-                <Radio id="lay-ls-blog" name="blog" value="list" label="List" isChecked={content.pages.blog.layout === 'list'} onChange={handleLayoutChange} indent={1} />
-                <Radio id="lay-ca-blog" name="blog" value="cards" label="Cards" isChecked={content.pages.blog.layout === 'cards'} onChange={handleLayoutChange} indent={1} />
+                {editorInputs.layouts.blog.map(input => (
+                  <Radio key={input.id} id={input.id} name="blog" value={input.value} label={input.label} isChecked={content.pages.blog.layout === input.value} onChange={handleLayoutChange} indent={1} />
+                ))}
               </Collapsible>
              <Checkbox id="contact" name="contact" value="contact" label="Contact" isChecked={content.pages.contact.enabled} onChange={handlePageChange} />
             </div>
@@ -173,4 +172,3 @@ const EditorPanel = () => {
 }
 
 export default EditorPanel
-
