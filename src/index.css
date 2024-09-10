@@ -56,13 +56,13 @@ svg.flip {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #f1f1f1;
+  background: #b4b4b4;
   border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #dbdbdb;
+  background: #8a8a8a;
 }
 
 @media (min-width: 1024px) {
