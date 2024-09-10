@@ -1,6 +1,6 @@
-import Header from './Header'
-import Previewer from "./Previewer"
-import EditorPanel from "./EditorPanel"
+import Header from '../components/Editor/Header'
+import Previewer from '../components/Editor/Previewer'
+import EditorPanel from '../components/Editor/EditorPanel'
 
 const Editor = () => {
   return (

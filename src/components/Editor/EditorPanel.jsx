@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import useContentState from '../hooks/useContentState'
+import useContentState from '../../hooks/useContentState'
 
 const getIndentClass = (indent) => {
   const indentValue = ['', 'pl-6', 'pl-12', 'pl-18']
@@ -36,7 +36,7 @@ const Collapsible = ({ headerEl, toggleLabel, children }) => {
     <div className="collapsible">
       <div className="flex">
         {headerEl}
-        <button className="text-[11px] text-zinc-700 uppercase bg-zinc-100 pl-2 pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 transition-all" onClick={() => setExpanded(!expanded)} disabled={isDisabled} >
+        <button className="text-[11px] text-zinc-700 uppercase bg-zinc-100 pl-2 pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 disabled:pointer-events-none transition-all" onClick={() => setExpanded(!expanded)} disabled={isDisabled} >
           {toggleLabel}
           <svg className={`w-4 h-4 ${ expanded ? 'flip' : '' }`} width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 15 7-7 7 7" />
@@ -102,11 +102,13 @@ const EditorPanel = () => {
 
   const handlePageTypeChange = (e) => {
     handleChange('page', e.target.value)
+    document.getElementById('previewer').src = '/preview'
   }
 
   const handlePageChange = (e) => {
     const { name, checked } = e.target
     handleChange(`pages.${name}.enabled`, checked)
+    document.getElementById('previewer').src = '/preview'
   }
 
   const handleAboutSectionChange = (e) => {

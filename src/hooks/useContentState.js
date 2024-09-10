@@ -21,6 +21,12 @@ const defaultContent = {
   }
 }
 
+export const getEnabledPages = (content) => {
+  return Object.keys(content.pages).reduce((acc, key) => {
+    return content.pages[key].enabled ? [...acc, key] : acc
+  }, [])
+}
+
 const useContentState = () => {
   const [content, setContent] = useState(
     JSON.parse(localStorage.getItem('content')) ||
