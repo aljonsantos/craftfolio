@@ -34,7 +34,7 @@ const Preview = () => {
   }
 
   return (
-    <div className={`main ${content.page}`}>
+    <div className={`main ${content.page} text-sm md:text-base lg:text-base`}>
       <Navbar />
       <div>
         {structure}
