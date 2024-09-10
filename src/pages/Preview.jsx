@@ -34,7 +34,7 @@ const Preview = () => {
   }
 
   return (
-    <div>
+    <div className="main">
       <Navbar />
       <div>
         {structure}

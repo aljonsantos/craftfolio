@@ -45,6 +45,10 @@ svg.flip {
   transform: rotateX(180deg);
 }
 
+.navbar .active {
+  @apply font-semibold bg-zinc-200 text-zinc-800;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 6px;

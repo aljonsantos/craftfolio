@@ -1,7 +1,7 @@
 const Projects = () => {
   return (
-    <div className="h-screen">
-      <p id="projects">Projects</p>
+    <div id="projects" className="section h-screen">
+      <p>Projects</p>
     </div>
   )
 }

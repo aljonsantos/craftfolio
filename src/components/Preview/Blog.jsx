@@ -1,7 +1,7 @@
 const Blog = () => {
   return (
-    <div className="h-screen">
-      <p id="blog">Blog</p>
+    <div id="blog" className="section h-screen">
+      <p>Blog</p>
     </div>
   )
 }
