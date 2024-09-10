@@ -8,32 +8,31 @@ const Navbar = () => {
   const [active, setActive] = useState('about')
   
   const handleClick = (e) => {
-    if (content.page === 'single') {
-      e.preventDefault()
-      document.querySelector(e.target.hash).scrollIntoView({ behavior: 'smooth' })
-    } else {
+    if (content.page === 'multi') {
       setActive(e.target.innerText.toLowerCase())
     }
   }
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.section')
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id)
-        }
+    if (content.page === 'single') {
+      const sections = document.querySelectorAll('.section')
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id)
+          }
+        })
+      }, {
+        root: null,
+        threshold: 0.5
       })
-    }, {
-      root: null,
-      threshold: 0.6
-    })
 
-    sections.forEach((section) => observer.observe(section))
-    return () => {
-      sections.forEach((section) => observer.unobserve(section))
+      sections.forEach((section) => observer.observe(section))
+      return () => {
+        sections.forEach((section) => observer.unobserve(section))
+      }
     }
-  }, [])
+  }, [content.page])
 
   if (enabledPages.length === 1) {
     return
