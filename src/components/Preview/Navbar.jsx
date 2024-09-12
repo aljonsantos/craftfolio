@@ -78,8 +78,8 @@ const Navbar = () => {
   }
   
   return (
-    <nav className={`navbar fixed w-full bottom-[24px] lg:bottom-[36px] left-0 flex justify-center z-10 transition-all duration-400 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[180%] opacity-50'}`}>
-      <ul className="flex border capitalize text-xs md:text-[14px] text-zinc-700 border-zinc-300 rounded-full bg-zinc-100">
+    <nav className={`navbar fixed w-full bottom-[24px] lg:bottom-[50px] left-0 flex justify-center z-40 transition-all duration-400 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
+      <ul className="flex border capitalize text-[13px] md:text-[14px] text-zinc-700 border-zinc-300 rounded-full bg-zinc-100 shadow-lg lg:hover:scale-105">
         {links}
       </ul>
     </nav>
