@@ -21,11 +21,11 @@ const Preview = () => {
   let structure = null
   if (content.page === 'single') {
     structure = enabledPages.map(
-      page => <div key={page} className="p-[24px]">{pages[page]}</div>
+      page => <div key={page} className="p-[24px] max-w-[480px] mx-auto md:max-w-[700px]">{pages[page]}</div>
     )
   } else if (content.page === 'multi') {
     structure = (
-      <div className="p-[24px]">
+      <div className="p-[24px] max-w-[480px] mx-auto md:max-w-[700px]">
         <Routes>
           <Route path="/" element={<About />} />
           {enabledPages.map(page => <Route key={page} path={page} element={pages[page]} />)}
@@ -36,9 +36,10 @@ const Preview = () => {
   }
 
   return (
-    <div className={`main ${content.page} text-sm md:text-base lg:text-base`}>
+    <div className={`main ${content.page} text-sm md:text-base lg:text-base md:py-[70px]`}>
       <Navbar />
       <div>
+        <div className="hidden md:block fixed bg-white  md:h-[71px] w-full top-0 z-30"></div>
         {structure}
       </div>
     </div>

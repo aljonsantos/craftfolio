@@ -23,7 +23,7 @@ const Item = ({ title, year }) => {
 const Certifications = () => {
   return (
     <div>
-      <Title title="Certifications" textSize="base" />
+      <Title title="Certifications" />
       <div className="flex flex-wrap gap-3">
         {items.map((item, index) => <Item key={index} {...item} />)}
       </div>

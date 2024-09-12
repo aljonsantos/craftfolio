@@ -22,7 +22,7 @@ const Section = ({ title, content }) => {
 const Skills = () => {
   return (
     <div className="skills">
-      <Title title="Skills" textSize="base" />
+      <Title title="Skills" />
       <div className="flex flex-col gap-3">
         <Section title="Programming Languages" content={skills.programmingLanguages} />
         <Section title="Library & Frameworks" content={skills.libraryFrameworks} />

@@ -42,7 +42,7 @@ const Item = ({ title, company, location, date, description }) => {
 const Experience = () => {
   return (
     <div className="experience">
-      <Title title="Experience" textSize="base" />
+      <Title title="Experience" />
       <Timeline>
         {items.map((item, index) => <Item key={index} {...item} />)}
       </Timeline>

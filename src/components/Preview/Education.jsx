@@ -32,7 +32,7 @@ const Item = ({ title, school, location, date }) => {
 const Education = () => {
   return (
     <div className="education">
-      <Title title="Education" textSize="base" />
+      <Title title="Education" />
       <Timeline>
         {items.map((item, index) => <Item key={index} {...item} />)}
       </Timeline>
