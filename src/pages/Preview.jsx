@@ -21,15 +21,17 @@ const Preview = () => {
   let structure = null
   if (content.page === 'single') {
     structure = enabledPages.map(
-      page => <div key={page}>{pages[page]}</div>
+      page => <div key={page} className="p-[24px]">{pages[page]}</div>
     )
   } else if (content.page === 'multi') {
     structure = (
-      <Routes>
-        <Route path="/" element={<About />} />
-        {enabledPages.map(page => <Route key={page} path={page} element={pages[page]} />)}
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
+      <div className="p-[24px]">
+        <Routes>
+          <Route path="/" element={<About />} />
+          {enabledPages.map(page => <Route key={page} path={page} element={pages[page]} />)}
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      </div>
     )
   }
 

@@ -36,7 +36,8 @@ html {
 }
 
 .editor-panel button.toggle svg,
-.editor-panel .collapsible button svg {
+.editor-panel .collapsible button svg,
+.aboutme-card button svg {
   transform-style: preserve-3d;
   transition: transform 0.3s;
 }
