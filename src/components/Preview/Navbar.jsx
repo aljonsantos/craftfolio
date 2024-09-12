@@ -69,17 +69,17 @@ const Navbar = () => {
   let links = null
   if (content.page === 'single') {
     links = enabledPages.map(
-      page => <li key={page}><a href={`#${page}`} onClick={handleClick} className={`${page === active ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all hover:bg-zinc-200 hover:text-zinc-900 hover:font-semibold`}>{page}</a></li>
+      page => <li key={page}><a href={`#${page}`} onClick={handleClick} className={`${page === active ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-zinc-200 hover:text-zinc-900 hover:font-semibold`}>{page}</a></li>
     )
   } else {
     links = enabledPages.map(
-      page => <li key={page}><Link to={page} onClick={handleClick} className={`${page === active ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all hover:bg-zinc-200 hover:text-zinc-900 hover:font-semibold`}>{page}</Link></li>
+      page => <li key={page}><Link to={page} onClick={handleClick} className={`${page === active ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-zinc-200 hover:text-zinc-900 hover:font-semibold`}>{page}</Link></li>
     )
   }
   
   return (
-    <nav className={`navbar fixed w-full bottom-[24px] lg:bottom-[50px] left-0 flex justify-center z-40 transition-all duration-400 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
-      <ul className="flex border capitalize text-[13px] md:text-[14px] text-zinc-700 border-zinc-300 rounded-full bg-zinc-100 shadow-lg lg:hover:scale-105">
+    <nav className={`navbar fixed md:sticky w-full bottom-[36px] lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-40 transition-all duration-500 md:translate-y-0 md:opacity-100 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
+      <ul className="flex border capitalize text-[13px] md:text-[14px] text-zinc-700 border-zinc-300 rounded-3xl bg-zinc-100 shadow-lg lg:shadow-xl lg:hover:scale-105 transition-all duration-500">
         {links}
       </ul>
     </nav>

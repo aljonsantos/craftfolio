@@ -60,7 +60,6 @@ svg.flip {
 
 .main {
   min-height: 100vh;
-  max-width: 1110px;
   margin: 0 auto;
 }
 
@@ -119,6 +118,6 @@ svg.flip {
   }
 
   .header, .previewer {
-    max-width: 1110px;
+    max-width: 1310px;
   }
 }
