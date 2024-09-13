@@ -1,17 +1,16 @@
-import Title from "./Title"
+import Section from "./Section"
 
 const SoftSkills = () => {
   return (
-    <div>
-      <Title title="Soft Skills" />
-      <div className="flex flex-wrap gap-3 gap-y-0">
-        <div className="softskill">Problem Solving</div>
-        <div className="softskill">Teamwork</div>
-        <div className="softskill">Communication</div>
-        <div className="softskill">Time Management</div>
-        <div className="softskill">Adaptability</div>
+    <Section title={"Soft Skills"}>
+      <div className="flex flex-wrap gap-3 gap-y-0 md:gap-3 lg:gap-5">
+        <div>Problem Solving</div>
+        <div>Teamwork</div>
+        <div>Communication</div>
+        <div>Time Management</div>
+        <div>Adaptability</div>
       </div>
-    </div>
+    </Section>
   )
 }
 

@@ -1,6 +1,5 @@
 import useContentState from "../../hooks/useContentState"
 
-import AboutMeCard from "./AboutMeCard"
 import AboutMe from "./AboutMe"
 import Education from "./Education"
 import Experience from "./Experience"
@@ -13,7 +12,7 @@ const About = () => {
   const { sections } = content.pages.about
 
   return (
-    <div className="section">
+    <div className="flex flex-col lg:gap-3">
       <AboutMe />
       { sections.includes('education') && <Education /> }
       { sections.includes('experience') && <Experience /> }

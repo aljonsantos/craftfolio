@@ -1,5 +1,5 @@
+import Section from "./Section"
 import Timeline from "./Timeline"
-import Title from "./Title"
 
 const items = [
   {
@@ -33,7 +33,7 @@ const Item = ({ title, company, location, date, description }) => {
         <p>{company}</p>
         <p>{location}</p>
         <p className="mb-2">{date}</p>
-        <p className="text-zinc-700">{description}</p>
+        <p className="text-zinc-700 max-w-[50ch]">{description}</p>
       </div>
     </div>
   )
@@ -41,12 +41,11 @@ const Item = ({ title, company, location, date, description }) => {
 
 const Experience = () => {
   return (
-    <div className="experience">
-      <Title title="Experience" />
+    <Section title="Experience">
       <Timeline>
         {items.map((item, index) => <Item key={index} {...item} />)}
       </Timeline>
-    </div>
+    </Section>
   )
 }
 

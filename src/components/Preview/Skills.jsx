@@ -1,4 +1,4 @@
-import Title from "./Title"
+import Section from "./Section"
 
 const skills = {
   programmingLanguages: ['JavaScript', 'Typescript', 'Python', 'Java', 'HTML', 'CSS'],
@@ -6,11 +6,11 @@ const skills = {
   toolsPlatforms: ['Git', 'GitHub', 'Vercel', 'Firebase', 'PostgreSQL', 'MySQL', 'MongoDB', 'Docker', 'AWS S3'],
 }
 
-const Section = ({ title, content }) => {
+const Part = ({ title, content }) => {
   return (
     <div className="flex flex-col gap-3">
       <p className="font-semibold pl-1">{title}</p>
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="flex flex-wrap gap-2 mb-2 md:text-sm">
         {content.map((item, index) => (
           <div key={index} className=" text-zinc-500 border border-zinc-200 bg-zinc-100 px-2 rounded-3xl">{item}</div>
         ))}
@@ -21,14 +21,13 @@ const Section = ({ title, content }) => {
 
 const Skills = () => {
   return (
-    <div className="skills">
-      <Title title="Skills" />
+    <Section title="Skills">
       <div className="flex flex-col gap-3">
-        <Section title="Programming Languages" content={skills.programmingLanguages} />
-        <Section title="Library & Frameworks" content={skills.libraryFrameworks} />
-        <Section title="Tools & Platforms" content={skills.toolsPlatforms} />
+        <Part title="Programming Languages" content={skills.programmingLanguages} />
+        <Part title="Library & Frameworks" content={skills.libraryFrameworks} />
+        <Part title="Tools & Platforms" content={skills.toolsPlatforms} />
       </div>
-    </div>
+    </Section>
   )
 }
 

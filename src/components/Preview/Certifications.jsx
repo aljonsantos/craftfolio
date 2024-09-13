@@ -1,4 +1,4 @@
-import Title from "./Title"
+import Section from "./Section"
 
 const items = [
   {
@@ -22,12 +22,11 @@ const Item = ({ title, year }) => {
 
 const Certifications = () => {
   return (
-    <div>
-      <Title title="Certifications" />
+    <Section title="Certifications">
       <div className="flex flex-wrap gap-3">
         {items.map((item, index) => <Item key={index} {...item} />)}
       </div>
-    </div>
+    </Section>
   )
 }
 

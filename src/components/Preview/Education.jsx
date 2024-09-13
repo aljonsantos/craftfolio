@@ -1,5 +1,5 @@
+import Section from "./Section"
 import Timeline from "./Timeline"
-import Title from "./Title"
 
 const items = [
   {
@@ -31,12 +31,11 @@ const Item = ({ title, school, location, date }) => {
 
 const Education = () => {
   return (
-    <div className="education">
-      <Title title="Education" />
+    <Section title={"Education"}>
       <Timeline>
         {items.map((item, index) => <Item key={index} {...item} />)}
       </Timeline>
-    </div>
+    </Section>
   )
 }
 
