@@ -18,6 +18,10 @@ const defaultContent = {
     contact:{
       enabled: true
     }
+  },
+  color: {
+    value: 'default',
+    accent: '215'
   }
 }
 

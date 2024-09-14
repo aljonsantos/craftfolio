@@ -43,7 +43,7 @@ const Preview = () => {
       </div>
       <div className="relative">
         <Navbar />
-        <div className="hidden md:block fixed bg-white md:h-[140px] w-full top-0 z-30"></div>
+        <div className="hidden md:block fixed bg-white md:h-[140px] w-full top-0 z-40"></div>
         <div className="relative top-[20px]">
           {structure}
         </div>

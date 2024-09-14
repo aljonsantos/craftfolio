@@ -9,8 +9,8 @@ export default {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
-      fontSize: {
-        
+      colors: {
+        accent: 'hsla(var(--clr-accent), 1)',
       }
     },
   },

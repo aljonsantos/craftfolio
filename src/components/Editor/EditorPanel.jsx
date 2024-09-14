@@ -24,9 +24,9 @@ const Checkbox = ({ id, name, value, label, isChecked, isDisabled, onChange, ind
   )
 }
 
-const Collapsible = ({ headerEl, toggleLabel, children }) => {
+const Collapsible = ({ headerEl, type, toggleLabel, children }) => {
   const [expanded, setExpanded] = useState(false)
-  const isDisabled = !headerEl.props.isChecked
+  const isDisabled = type === 'input' ? !headerEl.props.isChecked : false
 
   useEffect(() => {
     if (isDisabled) setExpanded(false)
@@ -34,9 +34,9 @@ const Collapsible = ({ headerEl, toggleLabel, children }) => {
 
   return (
     <div className="collapsible">
-      <div className="flex">
+      <div className="flex items-center">
         {headerEl}
-        <button className="text-[11px] text-zinc-700 uppercase bg-zinc-100 pl-2 pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 disabled:pointer-events-none transition-all" onClick={() => setExpanded(!expanded)} disabled={isDisabled} >
+        <button className={`text-[11px] text-zinc-700 uppercase bg-zinc-100 ${toggleLabel ? 'pl-2' : 'pl-1'} pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 disabled:pointer-events-none transition-all`} onClick={() => setExpanded(!expanded)} disabled={isDisabled}>
           {toggleLabel}
           <svg className={`w-4 h-4 ${ expanded ? 'flip' : '' }`} width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 15 7-7 7 7" />
@@ -91,6 +91,37 @@ const editorInputs = {
   }
 }
 
+const Color = ({ color, onChange }) => {
+  const [hue, setHue] = useState(color.accent)
+
+  useEffect(() => {
+    document.body.style.setProperty('--clr-accent', `${color.accent}deg, 50%, 40%`)
+  }, [color.accent])
+
+  const handleHueChange = (e) => {
+    const hue = e.target.value
+    // document.body.style.setProperty('--clr-accent', `${hue}deg, 50%, 40%`)
+    // console.log(document.body.style.getPropertyValue('--clr-accent'))
+
+    onChange(hue)
+    setHue(hue)
+  }
+
+  return (
+    <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
+      <Radio id="clr" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
+      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" toggleLabel="custom" >
+        <div className="w-[90%] pl-6">
+          <div className="w-full h-2 rounded-full" style={{
+            background: "linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%)"
+          }} />
+          <input id="hue" type="range" max="360" value={hue} onChange={handleHueChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
+        </div>
+      </Collapsible>
+    </div>
+  )
+}
+
 const EditorPanel = () => {
   const [content, setContent] = useContentState()
   const [open, setOpen] = useState(false)
@@ -123,12 +154,20 @@ const EditorPanel = () => {
     handleChange(`pages.${name}.layout`, value)
   }
 
-  // console.log(content)
+  const handleColorChange = (value) => {
+    if (value === 'default' || value === 'accent') {
+      handleChange(`color.value`, value)
+    } else {
+      handleChange('color.accent', value)
+    }
+  }
+
+  // console.log(content.color)
 
   return (
     <>
-      {open && <div className='overlay bg-black opacity-50 fixed inset-0 z-10 transition-all lg:hidden' onClick={() => setOpen(!open)}></div>}
-      <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white z-20 lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
+      {open && <div className='overlay bg-black opacity-50 fixed inset-0 transition-all lg:hidden' onClick={() => setOpen(!open)}></div>}
+      <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white z-60 lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
         <div className="panel-header h-14 flex justify-between items-center px-5 lg:pl-8 sticky top-0 w-full border-b overflow-hidden">
           <h2 className="font-bold">Craftfolio</h2>
           <button className='toggle' onClick={() => setOpen(!open)}>
@@ -146,26 +185,31 @@ const EditorPanel = () => {
               ))}
             </div>
           </div>
-          <div className="section py-4 px-5 pr-3 lg:pl-8 ">
+          <div className="section py-4 px-5 pr-3 lg:pl-8 border-b">
             <h3 className="text-zinc-400 font-semibold uppercase mb-5">Pages & Layout</h3>
             <div className="section-body flex flex-col gap-4">
-              <Collapsible headerEl={<Checkbox id="about" name="about" value="about" label="About" isChecked={true} isDisabled={true} />} toggleLabel="sections" >
+              <Collapsible headerEl={<Checkbox id="about" name="about" value="about" label="About" isChecked={true} isDisabled={true} />} type="input" toggleLabel="sections" >
                 {editorInputs.aboutSections.map(input => (
                   <Checkbox key={input.id} id={input.id} name={input.id} value={input.value} label={input.label} isChecked={content.pages.about.sections.includes(input.id)} onChange={handleAboutSectionChange} indent={1} />
                 ))}
               </Collapsible>
-              <Collapsible headerEl={<Checkbox id="projects" name="projects" value="projects" label="Projects" isChecked={content.pages.projects.enabled} onChange={handlePageChange} />} toggleLabel="layout" >
+              <Collapsible headerEl={<Checkbox id="projects" name="projects" value="projects" label="Projects" isChecked={content.pages.projects.enabled} onChange={handlePageChange} />} type="input" toggleLabel="layout" >
                 {editorInputs.layouts.projects.map(input => (
                   <Radio key={input.id} id={input.id} name="projects" value={input.value} label={input.label} isChecked={content.pages.projects.layout === input.value} onChange={handleLayoutChange} indent={1} />
                 ))}
               </Collapsible>
-              <Collapsible headerEl={<Checkbox id="blog" name="blog" value="blog" label="Blog" isChecked={content.pages.blog.enabled} onChange={handlePageChange} />} toggleLabel="layout" >
+              <Collapsible headerEl={<Checkbox id="blog" name="blog" value="blog" label="Blog" isChecked={content.pages.blog.enabled} onChange={handlePageChange} />} type="input" toggleLabel="layout" >
                 {editorInputs.layouts.blog.map(input => (
                   <Radio key={input.id} id={input.id} name="blog" value={input.value} label={input.label} isChecked={content.pages.blog.layout === input.value} onChange={handleLayoutChange} indent={1} />
                 ))}
               </Collapsible>
              <Checkbox id="contact" name="contact" value="contact" label="Contact" isChecked={content.pages.contact.enabled} onChange={handlePageChange} />
             </div>
+          </div>
+          <div className="section py-4 px-5 pr-3 lg:pl-8">
+            <Collapsible headerEl={<h3 className="text-zinc-400 font-semibold uppercase">Colors</h3>}>
+              <Color color={content.color} onChange={handleColorChange} />
+            </Collapsible>
           </div>
         </div>
       </div>

@@ -78,7 +78,7 @@ const Navbar = () => {
   }
   
   return (
-    <nav className={`navbar fixed md:sticky w-full bottom-[36px] lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-40 transition-all duration-500 md:translate-y-0 md:opacity-100 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
+    <nav className={`navbar fixed md:sticky w-full bottom-[36px] lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 transition-all duration-500 md:translate-y-0 md:opacity-100 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
       <ul className="flex border capitalize text-[13px] md:text-[14px] text-zinc-700 border-zinc-300 rounded-3xl bg-zinc-100 shadow-lg lg:shadow-xl lg:hover:scale-105 transition-all duration-500">
         {links}
       </ul>
