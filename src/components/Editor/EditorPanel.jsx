@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'
 
+import Overlay from './Overlay.jsx'
+import PanelHeader from './PanelHeader.jsx'
+import PanelSection from './PanelSection.jsx'
+import SectionTitle from './SectionTitle.jsx'
+
 const getIndentClass = (indent) => {
   const indentValue = ['', 'pl-6', 'pl-12', 'pl-18']
   return indentValue[indent]
@@ -23,7 +28,7 @@ const Checkbox = ({ id, name, value, label, isChecked, isDisabled, onChange, ind
   )
 }
 
-const Collapsible = ({ headerEl, type, toggleLabel, children }) => {
+const Collapsible = ({ headerEl, type, toggleLabel, noSeparator, children }) => {
   const [expanded, setExpanded] = useState(false)
   const isDisabled = type === 'input' ? !headerEl.props.isChecked : false
 
@@ -42,7 +47,7 @@ const Collapsible = ({ headerEl, type, toggleLabel, children }) => {
           </svg>
         </button>
       </div>
-      <div className={`collapse-body h-0 opacity-0 overflow-hidden flex flex-col gap-4 border-b border-b-transparent transition-all ${ expanded ? 'h-auto pt-5 pb-4 opacity-100 border-b-zinc-200' : '' }`}>
+      <div className={`collapse-body h-0 opacity-0 overflow-hidden flex flex-col gap-4 border-b-zinc-200 transition-all ${ expanded ? `h-auto pt-5 pb-4 opacity-100 ${!noSeparator ? 'border-b' : '' }` : '' }`}>
         {children}
       </div>
     </div>
@@ -77,7 +82,7 @@ const Color = ({ color, onChange }) => {
   const [hue, setHue] = useState(color.accent)
 
   useEffect(() => {
-    document.body.style.setProperty('--clr-accent', `${color.accent}deg, 50%, 40%`)
+    document.body.style.setProperty('--clr-accent', `${color.accent}deg, 60%, 50%`)
   }, [color.accent])
 
   const handleHueChange = (e) => {
@@ -89,10 +94,10 @@ const Color = ({ color, onChange }) => {
   return (
     <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
       <Radio id="clr" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
-      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" toggleLabel="custom" >
-        <div className="w-[90%] pl-6">
+      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" toggleLabel="custom" noSeparator >
+        <div className="w-[90%] pl-6 h-0">
           <div className="w-full h-2 rounded-full" style={{
-            background: "linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 83%, #ff0000 100%)"
+            background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
           }} />
           <input id="hue" type="range" max="360" value={hue} onChange={handleHueChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
         </div>
@@ -137,27 +142,18 @@ const EditorPanel = ({ content, onUpdateContent }) => {
 
   return (
     <>
-      <div className={`overlay bg-black fixed inset-0 transition-opacity lg:hidden ${open ? 'translate-y-0 opacity-60' : '-translate-y-full opacity-0'}`} onClick={() => setOpen(false)} />
+      <Overlay active={open} onClick={() => setOpen(false)} />
       <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
-        <div className="panel-header max-w-[500px] md:max-w-[700px] mx-auto h-14 flex justify-between items-center px-5 lg:pl-8 sticky top-0 w-full border-b overflow-hidden">
-          <h2 className="font-bold">Craftfolio</h2>
-          <button className='toggle' onClick={() => setOpen(!open)}>
-            <svg className={`w-6 h-6 text-black ${ open ? 'flip' : '' }`} width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 15 7-7 7 7" />
-            </svg>
-          </button>
-        </div>
+        <PanelHeader open={open} togglePanel={() => setOpen(!open)} />
       <div className="panel-body max-w-[500px] md:max-w-[700px] mx-auto text-sm overflow-y-scroll">
-        <div className="section py-4 px-5 pr-3 lg:pl-8 border-b">
-          <h3 className="text-zinc-400 font-semibold uppercase mb-5">Navigation</h3>
+        <PanelSection title="Navigation">
           <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
             {editorInputs.pageType.map(input => (
               <Radio key={input.id} id={input.id} name="page" value={input.value} label={input.label} isChecked={content.page === input.id} onChange={handlePageTypeChange} />
             ))}
           </div>
-        </div>
-        <div className="section py-4 px-5 pr-3 lg:pl-8 border-b">
-          <h3 className="text-zinc-400 font-semibold uppercase mb-5">Pages & Layout</h3>
+        </PanelSection>
+        <PanelSection title="Pages & Layout">
           <div className="section-body flex flex-col gap-4">
             <Collapsible headerEl={<Checkbox id="about" name="about" value="about" label="About" isChecked={true} isDisabled={true} />} type="input" toggleLabel="sections" >
               {editorInputs.aboutSections.map(input => (
@@ -176,9 +172,9 @@ const EditorPanel = ({ content, onUpdateContent }) => {
             </Collapsible>
             <Checkbox id="contact" name="contact" value="contact" label="Contact" isChecked={content.pages.contact.enabled} onChange={handlePageChange} />
           </div>
-        </div>
+        </PanelSection>
         <div className="section py-4 px-5 pr-3 lg:pl-8">
-          <Collapsible headerEl={<h3 className="text-zinc-400 font-semibold uppercase">Colors</h3>}>
+          <Collapsible headerEl={<h3 className="text-zinc-400 font-semibold uppercase">Colors</h3>} noSeparator >
             <Color color={content.color} onChange={handleColorChange} />
           </Collapsible>
         </div>
