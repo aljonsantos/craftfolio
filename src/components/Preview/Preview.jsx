@@ -33,7 +33,7 @@ const Preview = ({ content, fullScreenView }) => {
       <div className="pb-0 mx-auto shrink-0 md:min-w-[255px] md:w-[35%] lg:w-[30%]">
         <AboutMeCard />
       </div>
-      <div className="relative">
+      <div className="relative w-full">
         <Navbar content={content} activePage={activePage} setActivePage={setActivePage} fullScreenView={fullScreenView} />
         {pages}
       </div>

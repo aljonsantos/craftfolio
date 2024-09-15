@@ -1,6 +1,6 @@
 const Header = ({ fullScreenView, toggleFullScreenView }) => {
   return (
-    <div className={`header ${fullScreenView ? 'transparent border-none' : 'bg-white'} px-5 py-4 border-solid border-b border-zinc-300 rounded-b-2xl lg:border-none`}>
+    <div className={`header ${fullScreenView ? 'transparent border-none shadow-none' : 'bg-white'} px-5 py-4 border-solid border-b border-zinc-300 rounded-b-2xl shadow-2xl lg:shadow-none lg:border-none`}>
       <div className="flex justify-between items-center max-w-[500px] md:max-w-[700px] lg:max-w-full mx-auto">
         <div className="content">
           <h1 className="text-2xl font-bold">Preview</h1>
