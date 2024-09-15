@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import useContentState from '../../hooks/useContentState'
 
 const getIndentClass = (indent) => {
   const indentValue = ['', 'pl-6', 'pl-12', 'pl-18']
@@ -50,23 +49,6 @@ const Collapsible = ({ headerEl, type, toggleLabel, children }) => {
   )
 }
 
-// Utility function to update nested state
-const updateState = (obj, keys, value) => {
-  const [key, ...rest] = keys.split('.')
-
-  if (rest.length === 0) {
-    return {
-      ...obj,
-      [key]: value
-    }
-  }
-
-  return {
-    ...obj,
-    [key]: updateState(obj[key], rest.join('.'), value)
-  }
-}
-
 const editorInputs = {
   pageType: [
     { id: 'single', value: 'single', label: 'Single Page' },
@@ -100,9 +82,6 @@ const Color = ({ color, onChange }) => {
 
   const handleHueChange = (e) => {
     const hue = e.target.value
-    // document.body.style.setProperty('--clr-accent', `${hue}deg, 50%, 40%`)
-    // console.log(document.body.style.getPropertyValue('--clr-accent'))
-
     onChange(hue)
     setHue(hue)
   }
@@ -122,52 +101,44 @@ const Color = ({ color, onChange }) => {
   )
 }
 
-const EditorPanel = () => {
-  const [content, setContent] = useContentState()
+const EditorPanel = ({ content, onUpdateContent }) => {
   const [open, setOpen] = useState(false)
-  
-  const handleChange = (key, value) => {
-    setContent(updateState(content, key, value))
-    document.getElementById('previewer').contentWindow.location.reload()
-  }
-
+ 
   const handlePageTypeChange = (e) => {
-    handleChange('page', e.target.value)
-    document.getElementById('previewer').src = '/preview'
+    onUpdateContent('page', e.target.value)
   }
 
   const handlePageChange = (e) => {
     const { name, checked } = e.target
-    handleChange(`pages.${name}.enabled`, checked)
-    document.getElementById('previewer').src = '/preview'
+    onUpdateContent(`pages.${name}.enabled`, checked)
   }
 
   const handleAboutSectionChange = (e) => {
     const { checked, value } = e.target
     const { sections } = content.pages.about
     const updatedSections = checked ? [...sections, value] : sections.filter(section => section !== value)
-    handleChange('pages.about.sections', updatedSections)
+    onUpdateContent('pages.about.sections', updatedSections)
   }
 
   const handleLayoutChange = (e) => {
     const { name, value } = e.target
-    handleChange(`pages.${name}.layout`, value)
+    onUpdateContent(`pages.${name}.layout`, value)
   }
 
   const handleColorChange = (value) => {
     if (value === 'default' || value === 'accent') {
-      handleChange(`color.value`, value)
+      onUpdateContent(`color.value`, value)
     } else {
-      handleChange('color.accent', value)
+      onUpdateContent('color.accent', value)
     }
   }
 
-  // console.log(content.color)
+  // console.log(content)
 
   return (
     <>
-      {open && <div className='overlay bg-black opacity-50 fixed inset-0 transition-all lg:hidden' onClick={() => setOpen(!open)}></div>}
-      <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white z-60 lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
+      <div className={`overlay bg-black fixed inset-0 transition-opacity lg:hidden ${open ? 'translate-y-0 opacity-60' : '-translate-y-full opacity-0'}`} onClick={() => setOpen(false)} />
+      <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white z-80 lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
         <div className="panel-header h-14 flex justify-between items-center px-5 lg:pl-8 sticky top-0 w-full border-b overflow-hidden">
           <h2 className="font-bold">Craftfolio</h2>
           <button className='toggle' onClick={() => setOpen(!open)}>

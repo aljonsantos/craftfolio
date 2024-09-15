@@ -1,6 +1,10 @@
-const Previewer = () => {
+import Preview from "../Preview/Preview"
+
+const Previewer = ({ content }) => {
   return (
-    <iframe src='/preview' id="previewer" className="previewer w-full lg:border border-dashed border-zinc-300 lg:rounded-2xl"></iframe>
+    <div id="previewer" className="previewer w-full lg:border border-dashed border-zinc-300 lg:rounded-2xl overflow-scroll">
+      <Preview content={content} />
+    </div>
   )
 }
 

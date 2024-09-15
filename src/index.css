@@ -84,6 +84,16 @@ svg.flip {
   background: #8a8a8a;
 }
 
+.app.full .editor-panel {
+  opacity: 0;
+  transform: translateY(130%);
+}
+
+.app.full .header .content {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (min-width: 1024px) {
   .main-wrapper {
     position: relative;
@@ -94,6 +104,16 @@ svg.flip {
     align-items: center;
     padding: 20px;
     height: 100vh;
+  }
+
+  .app.full .main-wrapper {
+    left: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .app.full .editor-panel {
+    transform: translateX(-130%);
   }
 
   .editor-panel {

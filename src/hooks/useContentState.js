@@ -41,7 +41,27 @@ const useContentState = () => {
     localStorage.setItem('content', JSON.stringify(content))
   }, [content])
 
-  return [content, setContent]
+  const update = (obj, keys, value) => {
+    const [key, ...rest] = keys.split('.')
+  
+    if (rest.length === 0) {
+      return {
+        ...obj,
+        [key]: value
+      }
+    }
+  
+    return {
+      ...obj,
+      [key]: update(obj[key], rest.join('.'), value)
+    }
+  }
+
+  const updateContent = (keys, value) => {
+    setContent(update(content, keys, value))
+  }
+
+  return [content, updateContent]
 }
 
 export default useContentState
