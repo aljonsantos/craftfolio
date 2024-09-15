@@ -1,9 +1,8 @@
 const Title = ({ title }) => {
   return (
-    <div className="relative pl-2 md:sticky md:top-[140px] z-20">
-      <p className="text-accent text-lg md:text-xl font-semibold mb-5 lg:mb-8 lg:mt-0 pl-3">{title}</p>
-      <div className="absolute top-1/4 left-[5px] h-[50%] w-[5px] bg-accent rounded-full"></div>
-      <div className="absolute bg-gradient-to-b from-white from-50% w-full h-[180%] top-0 left-0 -z-10"></div>
+    <div className="title relative bg-white/90 md:sticky md:top-[140px] pl-1 md:pl-5 md:py-4 md:mb-3 lg:py-5">
+      <p className="text-accent text-lg md:text-xl font-semibold pl-4 py-4 lg:pl-6">{title}</p>
+      <div className="absolute top-1/2 left-[3px] md:left-5 lg:left-7 h-3 md:h-4 w-[5px] -translate-y-1/2 bg-accent rounded-full"></div>
     </div>
   )
 }

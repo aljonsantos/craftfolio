@@ -25,7 +25,7 @@ const App = () => {
       <div className="main-wrapper">
         <Header fullScreenView={fullScreenView} toggleFullScreenView={handleToggleFullScreenView} />
         {fullScreenView 
-          ? <Preview content={content} />
+          ? <Preview content={content} fullScreenView={fullScreenView} />
           : <Previewer content={content} />}
       </div>
       <EditorPanel content={content} onUpdateContent={handleUpdateContent} />

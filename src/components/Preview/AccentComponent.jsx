@@ -41,7 +41,7 @@ const AccentComponent = ({ roundedClass, children }) => {
   return (
     <div className={`relative overflow-clip ${roundedClass}`} ref={ref}>
       <div
-        className={`${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[40%] aspect-square bg-accent/20 blur-[124px] rounded-full pointer-events-none transition-opacity duration-500 z-30`}
+        className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[40%] aspect-square bg-accent/30 blur-[124px] rounded-full z-10 pointer-events-none transition-opacity duration-500`}
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,

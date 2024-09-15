@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { getEnabledPages } from '../../hooks/useContentState'
 
-const Navbar = ({ content, activePage, setActivePage }) => {
+const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
   const [showNavbar, setShowNavbar] = useState(true)
   const prevScrollY = useRef(0)
   
@@ -13,7 +13,7 @@ const Navbar = ({ content, activePage, setActivePage }) => {
   }
 
   useEffect(() => {
-    let scrollContainer = document.getElementById('previewer') || window
+    let scrollContainer = fullScreenView ? window : document.getElementById('previewer')
 
     const handleScroll = () => {
       // if hovering over navbar, don't hide it
@@ -21,7 +21,7 @@ const Navbar = ({ content, activePage, setActivePage }) => {
         return
       }
       // if scrolling down, hide navbar, else show it
-      const currentScrollY = scrollContainer.scrollTop
+      const currentScrollY = fullScreenView ? scrollContainer.scrollY : scrollContainer.scrollTop
       if (currentScrollY > prevScrollY.current) {
         setShowNavbar(false)
       } else {
@@ -68,7 +68,7 @@ const Navbar = ({ content, activePage, setActivePage }) => {
   )
 
   return (
-    <nav className={`navbar fixed md:sticky w-full bottom-[36px] lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 transition-all duration-500 md:translate-y-0 md:opacity-100 lg:mb-6 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-50'}`}>
+    <nav className={`navbar fixed md:sticky w-full ${fullScreenView ? 'bottom-[36px]' : 'bottom-[82px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 transition-all duration-500 md:translate-y-0 md:opacity-100 lg:mb-6 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-0'}`}>
       <ul className="flex border capitalize text-[13px] md:text-[14px] text-zinc-700 border-zinc-300 rounded-3xl bg-zinc-100 shadow-lg lg:shadow-xl lg:hover:scale-105 transition-all duration-500">
         {links}
       </ul>
