@@ -19,7 +19,7 @@ const items = [
 const Item = ({ title, school, location, date }) => {
   return (
     <div>
-      <p className="font-semibold bg-zinc-100 border border-zinc-200 inline-block px-2 rounded-xl mb-1 lg:px-3 lg:py-1">{title}</p>
+      <p className="font-semibold text-accent-700 bg-accent/10 border border-accent-100/70 inline-block px-2 rounded-xl mb-1 lg:px-3 lg:py-1">{title}</p>
       <div className="pl-2">
         <p>{school}</p>
         <p>{location}</p>

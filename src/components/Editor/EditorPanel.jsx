@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import Overlay from './Overlay.jsx'
 import PanelHeader from './PanelHeader.jsx'
@@ -6,6 +6,7 @@ import PanelSection from './PanelSection.jsx'
 import Radio from './Radio.jsx'
 import Checkbox from './Checkbox.jsx'
 import Collapsible from './Collapsible.jsx'
+import ColorInput from './ColorInput.jsx'
 
 const editorInputs = {
   pageType: [
@@ -29,34 +30,6 @@ const editorInputs = {
       { id: 'lay-ca-blog', value: 'cards', label: 'Cards' }
     ]
   }
-}
-
-const Color = ({ color, onChange }) => {
-  const [hue, setHue] = useState(color.accent)
-
-  useEffect(() => {
-    document.body.style.setProperty('--clr-accent', `${color.accent}deg, 60%, 50%`)
-  }, [color.accent])
-
-  const handleHueChange = (e) => {
-    const hue = e.target.value
-    onChange(hue)
-    setHue(hue)
-  }
-
-  return (
-    <div className="section-body flex flex-col gap-5 lg:flex-col lg:gap-4">
-      <Radio id="clr-default" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
-      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" noSeparator >
-        <div className="w-[200px] lg:w-[90%] pl-6 h-0">
-          <div className="w-full h-2 rounded-full" style={{
-            background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
-          }} />
-          <input id="hue" type="range" max="360" value={hue} onChange={handleHueChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
-        </div>
-      </Collapsible>
-    </div>
-  )
 }
 
 const EditorPanel = ({ content, onUpdateContent }) => {
@@ -127,7 +100,7 @@ const EditorPanel = ({ content, onUpdateContent }) => {
           </div>
         </PanelSection>
         <PanelSection title="Colors" noSeparator>
-          <Color color={content.color} onChange={handleColorChange} />
+          <ColorInput color={content.color} onChange={handleColorChange} />
         </PanelSection>
       </div>
     </div>

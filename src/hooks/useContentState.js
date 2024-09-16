@@ -21,7 +21,10 @@ const defaultContent = {
   },
   color: {
     value: 'default',
-    accent: '215'
+    accent: {
+      hue: 201,
+      lightness: 32
+    }
   }
 }
 

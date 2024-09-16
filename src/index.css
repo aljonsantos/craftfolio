@@ -49,7 +49,7 @@ html {
 }
 
 .navbar .active {
-  @apply font-semibold bg-zinc-200 text-zinc-800;
+  @apply font-semibold text-accent-200 bg-accent-700;
 }
 
 .main {
