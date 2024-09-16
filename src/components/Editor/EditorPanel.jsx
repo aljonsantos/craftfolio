@@ -3,55 +3,9 @@ import { useState, useEffect } from 'react'
 import Overlay from './Overlay.jsx'
 import PanelHeader from './PanelHeader.jsx'
 import PanelSection from './PanelSection.jsx'
-import SectionTitle from './SectionTitle.jsx'
-import { IconArrowUp } from '../Common/Icons.jsx'
-
-const getIndentClass = (indent) => {
-  const indentValue = ['', 'pl-6', 'pl-12', 'pl-18']
-  return indentValue[indent]
-}
-
-const Radio = ({ id, name, value, label, onChange, isChecked, indent = 0 }) => {
-  return (
-    <div className={`flex items-center gap-1 ${ getIndentClass(indent) }`}>
-      <input id={id} type="radio" name={name} value={value} className="w-4 h-4 accent-black" onChange={onChange} checked={isChecked} />
-      <label htmlFor={id} className="ml-1">{label}</label>
-    </div>
-  )
-}
-
-const Checkbox = ({ id, name, value, label, isChecked, isDisabled, onChange, indent = 0 }) => {
-  return (
-    <div className={`flex items-center gap-1 ${ getIndentClass(indent) }`}>
-      <input id={id} type="checkbox" name={name} value={value} className="w-[1em] h-[1em] accent-black" checked={isChecked} disabled={isDisabled} onChange={onChange} />
-      <label htmlFor={id} className="ml-1">{label}</label>
-    </div>
-  )
-}
-
-const Collapsible = ({ headerEl, type, toggleLabel, noSeparator, children }) => {
-  const [expanded, setExpanded] = useState(false)
-  const isDisabled = type === 'input' ? !headerEl.props.isChecked : false
-
-  useEffect(() => {
-    if (isDisabled) setExpanded(false)
-  }, [isDisabled])
-
-  return (
-    <div className="collapsible">
-      <div className="flex items-center">
-        {headerEl}
-        <button className={`text-[11px] text-zinc-700 uppercase bg-zinc-100 ${toggleLabel ? 'pl-2' : 'pl-1'} pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 disabled:pointer-events-none transition-all`} onClick={() => setExpanded(!expanded)} disabled={isDisabled}>
-          {toggleLabel}
-          <IconArrowUp size={16} flip={expanded} />
-        </button>
-      </div>
-      <div className={`collapse-body h-0 opacity-0 overflow-hidden flex flex-col gap-4 border-b-zinc-200 transition-all ${ expanded ? `h-auto pt-5 pb-4 opacity-100 ${!noSeparator ? 'border-b' : '' }` : '' }`}>
-        {children}
-      </div>
-    </div>
-  )
-}
+import Radio from './Radio.jsx'
+import Checkbox from './Checkbox.jsx'
+import Collapsible from './Collapsible.jsx'
 
 const editorInputs = {
   pageType: [
@@ -92,8 +46,8 @@ const Color = ({ color, onChange }) => {
 
   return (
     <div className="section-body flex flex-col gap-5 lg:flex-col lg:gap-4">
-      <Radio id="clr" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
-      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" toggleLabel="custom" noSeparator >
+      <Radio id="clr-default" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
+      <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" noSeparator >
         <div className="w-[200px] lg:w-[90%] pl-6 h-0">
           <div className="w-full h-2 rounded-full" style={{
             background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
@@ -172,11 +126,9 @@ const EditorPanel = ({ content, onUpdateContent }) => {
             <Checkbox id="contact" name="contact" value="contact" label="Contact" isChecked={content.pages.contact.enabled} onChange={handlePageChange} />
           </div>
         </PanelSection>
-        <div className="section py-4 px-5 pr-3 lg:pl-8">
-          <Collapsible headerEl={<h3 className="text-zinc-400 font-semibold uppercase">Colors</h3>} noSeparator >
-            <Color color={content.color} onChange={handleColorChange} />
-          </Collapsible>
-        </div>
+        <PanelSection title="Colors" noSeparator>
+          <Color color={content.color} onChange={handleColorChange} />
+        </PanelSection>
       </div>
     </div>
     </>
