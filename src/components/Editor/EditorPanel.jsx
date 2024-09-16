@@ -4,6 +4,7 @@ import Overlay from './Overlay.jsx'
 import PanelHeader from './PanelHeader.jsx'
 import PanelSection from './PanelSection.jsx'
 import SectionTitle from './SectionTitle.jsx'
+import { IconArrowUp } from '../Common/Icons.jsx'
 
 const getIndentClass = (indent) => {
   const indentValue = ['', 'pl-6', 'pl-12', 'pl-18']
@@ -42,9 +43,7 @@ const Collapsible = ({ headerEl, type, toggleLabel, noSeparator, children }) => 
         {headerEl}
         <button className={`text-[11px] text-zinc-700 uppercase bg-zinc-100 ${toggleLabel ? 'pl-2' : 'pl-1'} pr-1 rounded-xl flex items-center gap-1 border ml-2 hover:bg-zinc-200 hover:text-zinc-900 hover:border-zinc-400 disabled:opacity-50 disabled:pointer-events-none transition-all`} onClick={() => setExpanded(!expanded)} disabled={isDisabled}>
           {toggleLabel}
-          <svg className={`w-4 h-4 ${ expanded ? 'flip' : '' }`} width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m5 15 7-7 7 7" />
-          </svg>
+          <IconArrowUp size={16} flip={expanded} />
         </button>
       </div>
       <div className={`collapse-body h-0 opacity-0 overflow-hidden flex flex-col gap-4 border-b-zinc-200 transition-all ${ expanded ? `h-auto pt-5 pb-4 opacity-100 ${!noSeparator ? 'border-b' : '' }` : '' }`}>

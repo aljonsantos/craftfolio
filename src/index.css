@@ -35,18 +35,16 @@ html {
   transform: translateY(0);
 }
 
-.editor-panel button.toggle svg,
-.editor-panel .collapsible button svg,
-.aboutme-card button svg {
-  transform-style: preserve-3d;
-  transition: transform 0.3s;
-}
-
 .panel-body {
   max-height: 70vh;
 }
 
-svg.flip {
+.icon.flippable {
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+}
+
+.icon.flip {
   transform: rotateX(180deg);
 }
 
