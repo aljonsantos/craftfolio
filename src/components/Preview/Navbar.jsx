@@ -59,10 +59,6 @@ const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
     }
   }, [content.page, setActivePage])
 
-  if (enabledPages.length === 1) {
-    return
-  }
-
   let links = enabledPages.map(
     page => <li key={page}><a href="" data-page={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-zinc-200 hover:text-zinc-900 hover:font-semibold`}>{page}</a></li>
   )

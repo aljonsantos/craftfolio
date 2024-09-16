@@ -92,10 +92,10 @@ const Color = ({ color, onChange }) => {
   }
 
   return (
-    <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
+    <div className="section-body flex flex-col gap-5 lg:flex-col lg:gap-4">
       <Radio id="clr" name="color" value="default" label="Default" isChecked={color.value === 'default'} onChange={(e) => onChange(e.target.value)} />
       <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={color.value === 'accent'} onChange={(e) => onChange(e.target.value)} />} type="input" toggleLabel="custom" noSeparator >
-        <div className="w-[90%] pl-6 h-0">
+        <div className="w-[200px] lg:w-[90%] pl-6 h-0">
           <div className="w-full h-2 rounded-full" style={{
             background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
           }} />

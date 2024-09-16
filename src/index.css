@@ -98,6 +98,10 @@ svg.flip {
   right: 1vw;
 }
 
+.app.full .overlay {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .navbar::after {
     content: '';
