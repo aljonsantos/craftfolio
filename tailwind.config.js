@@ -17,8 +17,18 @@ export default {
           DEFAULT: 'hsla(var(--clr-accent), 1)',
           700: 'hsla(var(--clr-accent-700), 1)',
           800: 'hsla(var(--clr-accent-800), 1)',
-        }
-      }
+        },
+        "background": 'rgb(var(--clr-background))',
+        "border": 'rgb(var(--clr-border))',
+        content: {
+          DEFAULT: 'rgb(var(--clr-content))',
+          700: 'rgb(var(--clr-content-700))',
+          500: 'rgb(var(--clr-content-500))',
+        },
+      },
+      transitionProperty: {
+        'max-height': 'height',
+      },
     },
   },
   plugins: [],

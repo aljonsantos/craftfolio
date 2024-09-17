@@ -33,7 +33,7 @@ const Item = ({ title, company, location, date, description }) => {
         <p>{company}</p>
         <p>{location}</p>
         <p className="mb-2">{date}</p>
-        <p className="text-zinc-700 max-w-[50ch]">{description}</p>
+        <p className="text-content-700 max-w-[50ch]">{description}</p>
       </div>
     </div>
   )

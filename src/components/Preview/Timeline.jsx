@@ -2,7 +2,7 @@ const Bullet = ({ last }) => {
   return (
     <div className="relative flex h-full">
       <div className="w-[14px] h-[14px] bg-accent-100 border border-accent-300 rounded-full mt-1 shadow lg:mt-2 -z-10"></div>
-      {!last && <div className="absolute top-3 left-1/2 w-px h-[calc(100%+24px)] bg-accent-100 -z-20"></div>}
+      {!last && <div className="absolute top-3 left-1/2 w-px h-[calc(100%+24px)] bg-accent-200 -z-20"></div>}
     </div>
   )
 }

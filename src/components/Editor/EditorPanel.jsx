@@ -58,7 +58,7 @@ const EditorPanel = ({ content, onUpdateContent }) => {
 
   const handleColorChange = (value) => {
     if (value === 'default' || value === 'accent') {
-      onUpdateContent(`color.value`, value)
+      onUpdateContent(`color.choice`, value)
     } else {
       onUpdateContent('color.accent', value)
     }
@@ -69,7 +69,7 @@ const EditorPanel = ({ content, onUpdateContent }) => {
   return (
     <>
       <Overlay active={open} onClick={() => setOpen(false)} />
-      <div className={`editor-panel ${ open ? 'open' : '' } border-solid border border-b-0 border-zinc-300 rounded-t-2xl pb-2 shadow-2xl shadow-black bg-white lg:w-[250px] lg:border lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-all duration-300`}>
+      <div className={`editor-panel bg-background ${ open ? 'open' : '' } border-solid border border-b-0 border-border/20 rounded-t-2xl pb-2 shadow-2xl shadow-black lg:w-[250px] lg:border lg:border-l-0 lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-transform duration-300`}>
         <PanelHeader open={open} togglePanel={() => setOpen(!open)} />
       <div className="panel-body max-w-[500px] md:max-w-[700px] mx-auto text-sm overflow-y-scroll">
         <PanelSection title="Navigation">

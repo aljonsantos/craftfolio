@@ -60,12 +60,12 @@ const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
   }, [content.page, setActivePage])
 
   let links = enabledPages.map(
-    page => <li key={page}><a href="" data-page={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-700 hover:text-accent-200 hover:font-semibold`}>{page}</a></li>
+    page => <li key={page}><a href="" data-page={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li>
   )
 
   return (
     <nav className={`navbar fixed md:sticky w-full ${fullScreenView ? 'bottom-[36px]' : 'bottom-[82px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 transition-all duration-500 md:translate-y-0 md:opacity-100 lg:mb-6 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-0'}`}>
-      <ul className="flex border capitalize text-[13px] md:text-[14px] text-accent-800 border-accent-100 rounded-3xl bg-accent-100/50 shadow-lg lg:shadow-xl lg:hover:scale-105 transition-all duration-500">
+      <ul className="flex border capitalize text-[13px] md:text-[14px] bg-background text-accent-800 border-accent-100 rounded-3xl shadow-lg lg:shadow-xl lg:hover:scale-105 lg:active:scale-100 transition-transform duration-500">
         {links}
       </ul>
     </nav>

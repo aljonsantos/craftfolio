@@ -6,9 +6,28 @@ html {
   scroll-behavior: smooth;
 }
 
-:root {
-  --h-header: 89px
-  --h-panel-header: 56px;
+@layer base {
+  :root {
+    --clr-background: 255 255 255;
+    --clr-border: 0 0 0;
+    --clr-content: 9 9 11;
+    --clr-content-700: 63 63 70;
+    --clr-content-500: 113 113 122;
+
+    --clr-scrollbar: #b4b4b4;
+    --clr-scrollbar-hover: #a1a1a1;
+  }
+  
+  :root[data-theme='dark'] {
+    --clr-background: 19 19 21;
+    --clr-border: 255 255 255;
+    --clr-content: 240 240 240;
+    --clr-content-700: 161 161 170;
+    --clr-content-500: 82 82 91;
+
+    --clr-scrollbar: #525252;
+    --clr-scrollbar-hover: #6b6b6b;
+  }
 }
 
 .header {
@@ -49,7 +68,7 @@ html {
 }
 
 .navbar .active {
-  @apply font-semibold text-accent-200 bg-accent-700;
+  @apply font-semibold text-accent-800 bg-accent-200;
 }
 
 .main {
@@ -72,13 +91,13 @@ html {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #b4b4b4;
+  background: var(--clr-scrollbar);
   border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #8a8a8a;
+  background: var(--clr-scrollbar-hover);
 }
 
 .app.full .editor-panel {
@@ -107,8 +126,8 @@ html {
     height: 150px;
     position: absolute;
     bottom: -20px;
-    background-color: rgba(255, 255, 255, .9);
-    /* backdrop-filter: saturate(150%) blur(24px); */
+    background-color: rgb(var(--clr-background) / 0.7);
+    backdrop-filter: saturate(150%) blur(24px);
     z-index: -1;
   }
 

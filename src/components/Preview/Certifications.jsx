@@ -15,7 +15,7 @@ const Item = ({ title, year }) => {
   return (
     <div className=" border border-accent-100/70 text-center max-w-[18ch] rounded-xl">
       <p className="font-semibold bg-accent/10 rounded-t-xl px-3 py-4 pb-2 border-b border-accent-100/70">{title}</p>
-      <p className="text-zinc-500 px-3 py-2 rounded-b-xl">{year}</p>
+      <p className="text-content-500 px-3 py-2 rounded-b-xl">{year}</p>
     </div>
   )
 }

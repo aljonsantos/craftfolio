@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './index.css'
 
 import useContentState from './hooks/useContentState'
+import { ThemeContextProvider } from './contexts/ThemeContext'
 
 import Header from './components/Editor/Header'
 import Previewer from './components/Editor/Previewer'
@@ -21,15 +22,17 @@ const App = () => {
   }
 
   return (
-    <div className={`app ${fullScreenView ? 'full' : ''}`}>
-      <div className="main-wrapper">
-        <Header fullScreenView={fullScreenView} toggleFullScreenView={handleToggleFullScreenView} />
-        {fullScreenView 
-          ? <Preview content={content} fullScreenView={fullScreenView} />
-          : <Previewer content={content} />}
+    <ThemeContextProvider>
+      <div className={`app ${fullScreenView ? 'full' : ''}`}>
+        <div className="main-wrapper">
+          <Header fullScreenView={fullScreenView} toggleFullScreenView={handleToggleFullScreenView} />
+          {fullScreenView 
+            ? <Preview content={content} fullScreenView={fullScreenView} />
+            : <Previewer content={content} />}
+        </div>
+        <EditorPanel content={content} onUpdateContent={handleUpdateContent} />
       </div>
-      <EditorPanel content={content} onUpdateContent={handleUpdateContent} />
-    </div>
+    </ThemeContextProvider>
   )
 }
 
