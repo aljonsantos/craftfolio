@@ -42,6 +42,15 @@ const setAccentCSSVariables = (theme, hue, lightness) => {
   }
 }
 
+const ColorRange = ({ id, min = 0, max, value, onChange, background }) => {
+  return (
+    <div className="w-[200px] lg:w-[90%] pl-6 h-3">
+      <div className="w-full h-2 rounded-full" style={{background}} />
+      <input id={id} type="range" min={min} max={max} value={value} onChange={onChange} className="appearance-none w-full relative -top-3 accent-accent bg-transparent hover:accent-accent focus:accent-accent"/>
+    </div>
+  )
+}
+
 const ColorInput = ({ color, onChange }) => {
   const { theme } = useContext(ThemeContext)
 
@@ -80,7 +89,13 @@ const ColorInput = ({ color, onChange }) => {
     <div className="section-body flex flex-col gap-5 lg:flex-col lg:gap-4">
       <Radio id="clr-default" name="color" value="default" label="Default" isChecked={choice === 'default'} onChange={handleChoiceChange} />
       <Collapsible headerEl={<Radio id="clr-accent" name="color" value="accent" label="Accent" isChecked={choice === 'accent'} onChange={handleChoiceChange} />} type="input" noSeparator >
-        <div className="w-[200px] lg:w-[90%] pl-6 h-3">
+        <ColorRange id="hue" max={360} value={hue} onChange={handleHueChange} 
+          background={`linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)`} 
+        />
+        <ColorRange id="lightness" min={20} max={80} value={lightness} onChange={handleLightnessChange}
+          background={`linear-gradient(to right, hsl(${hue}, 60%, 20%) 0%, hsl(${hue}, 60%, 80%) 100%)`}
+        />
+        {/* <div className="w-[200px] lg:w-[90%] pl-6 h-3">
           <div className="w-full h-2 rounded-full" style={{
             background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
           }} />
@@ -91,7 +106,7 @@ const ColorInput = ({ color, onChange }) => {
             background: `linear-gradient(to right, hsl(${hue}, 60%, 20%) 0%, hsl(${hue}, 60%, 80%) 100%)`
           }} />
           <input id="lightness" type="range" min={20} max={80} value={lightness} onChange={handleLightnessChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
-        </div>
+        </div> */}
       </Collapsible>
     </div>
   )
