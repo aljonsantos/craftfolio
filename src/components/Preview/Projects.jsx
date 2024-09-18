@@ -1,3 +1,4 @@
+import AccentComponent from "./AccentComponent"
 import Section from "./Section"
 import { IconArrowUpRight } from "../Common/Icons"
 
@@ -30,24 +31,28 @@ const projects = [
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="md:min-w-[300px] lg:w-[48%] rounded-2xl border border-accent-100 overflow-hidden">
-      <img className="mx-auto border-b border-accent-100" src={project.image} alt={project.title} />
-      <div className="px-3 py-2 lg:px-4 lg:py-3">
-        <ProjectTitle title={project.title} link={project.link} />
-        <p className="text-sm text-content-700">{project.description}</p>
+    <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]">
+      <div className="rounded-2xl border border-accent-100 overflow-hidden">
+        <img className="mx-auto border-b border-accent-100 opacity-20" src={project.image} alt={project.title} />
+        <div className="px-3 py-2 lg:px-4 lg:py-3">
+            <ProjectTitle title={project.title} link={project.link} />
+            <p className="text-sm text-content-700">{project.description}</p>
+        </div>
       </div>
-    </div>
+    </AccentComponent>
   )
 }
 
 const ProjectList = ({ project }) => {
   return (
-    <div className="flex flex-col gap-2 px-3 py-2 lg:px-4 lg:py-3 ">
-      <ProjectTitle title={project.title} link={project.link} />
-      <p className="text-content-content">{project.description}</p>
-      <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
-      <ProjectTechnologies technologies={project.technologies} />
-    </div>
+    <AccentComponent>
+      <div className="flex flex-col gap-2 px-4 py-4 lg:px-5 lg:py-5">
+        <ProjectTitle title={project.title} link={project.link} />
+        <p className="text-content-content">{project.description}</p>
+        <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
+        <ProjectTechnologies technologies={project.technologies} />
+      </div>
+    </AccentComponent>
   )
 }
 
@@ -75,7 +80,7 @@ const Projects = ({ content }) => {
   
   return (
     <Section title="Projects">
-      <div className="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6">
+      <div className={`flex flex-col md:flex-row md:flex-wrap ${layout === 'cards' ? 'gap-4 lg:gap-6' : 'gap-2'}`}>
         {projects.map((project, index) => layout === 'cards'
           ? <ProjectCard key={index} project={project} />
           : <ProjectList key={index} project={project} />

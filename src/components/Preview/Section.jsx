@@ -1,16 +1,13 @@
-import AccentComponent from "./AccentComponent"
 import Title from "./Title"
 
 const Section = ({ title, children }) => {
   const id = title.toLowerCase().split(" ").join("-")
 
   return (
-    <AccentComponent roundedClass="rounded-xl">
-      <div id={id} className="section pb-5 pt-3 lg:pb-7 rounded-xl border border-transparent lg:hover:border-accent-300/20 transition-all duration-400">
-        <Title title={title} />
-        {children}
-      </div>
-    </AccentComponent>
+    <div id={id} className="section pb-5 pt-3 lg:pb-7">
+      <Title title={title} />
+      {children}
+    </div>
   )
 }
 

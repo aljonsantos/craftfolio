@@ -1,3 +1,4 @@
+import AccentComponent from "./AccentComponent"
 import Section from "./Section"
 import Timeline from "./Timeline"
 
@@ -31,11 +32,13 @@ const Item = ({ title, school, location, date }) => {
 
 const Education = () => {
   return (
-    <Section title={"Education"}>
-      <Timeline>
-        {items.map((item, index) => <Item key={index} {...item} />)}
-      </Timeline>
-    </Section>
+    <AccentComponent>
+      <Section title="Education">
+        <Timeline>
+          {items.map((item, index) => <Item key={index} {...item} />)}
+        </Timeline>
+      </Section>
+    </AccentComponent>
   )
 }
 

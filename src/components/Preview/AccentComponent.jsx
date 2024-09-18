@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const AccentComponent = ({ roundedClass, children }) => {
+const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', opacity = 30, children }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [show, setShow] = useState(false)
   const ref = useRef(null)
@@ -39,9 +39,9 @@ const AccentComponent = ({ roundedClass, children }) => {
   }, [])
 
   return (
-    <div className={`relative overflow-clip ${roundedClass}`} ref={ref}>
+    <div className={`accent relative inline overflow-clip ${widthClass} ${roundedClass} border border-transparent lg:hover:border-accent-300/20`} ref={ref}>
       <div
-        className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[40%] aspect-square bg-accent/30 blur-[124px] rounded-full z-10 pointer-events-none transition-opacity duration-500`}
+        className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[200px] aspect-square bg-accent/${opacity} blur-[124px] rounded-full z-10 pointer-events-none transition-opacity duration-500`}
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,
