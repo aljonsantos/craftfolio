@@ -12,7 +12,7 @@ const Part = ({ title, content }) => {
       <p className="text-content-700 font-semibold pl-1">{title}</p>
       <div className="flex flex-wrap gap-2 mb-2 md:text-sm">
         {content.map((item, index) => (
-          <div key={index} className=" text-accent/80 border border-accent-100/70 bg-accent/10 px-2 rounded-3xl">{item}</div>
+          <div key={index} className=" text-accent border border-accent-100/70 bg-accent/10 px-2 rounded-3xl">{item}</div>
         ))}
       </div>
     </div>

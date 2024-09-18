@@ -21,8 +21,8 @@ html {
   :root[data-theme='dark'] {
     --clr-background: 19 19 21;
     --clr-border: 255 255 255;
-    --clr-content: 240 240 240;
-    --clr-content-700: 161 161 170;
+    --clr-content: 210 210 210;
+    --clr-content-700: 141 141 141;
     --clr-content-500: 82 82 91;
 
     --clr-scrollbar: #525252;
@@ -110,9 +110,10 @@ html {
   pointer-events: none;
 }
 
-.app.full .header {
-  width: 50%;
-  right: 1vw;
+.app.full .header .btn.fullscreen {
+  position: fixed;
+  top: 24px;
+  right: 24px;
 }
 
 .app.full .overlay {

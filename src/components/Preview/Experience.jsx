@@ -28,7 +28,7 @@ const items = [
 const Item = ({ title, company, location, date, description }) => {
   return (
     <div>
-      <p className="font-semibold bg-accent/10 text-accent-700 border border-accent-100/70 inline-block px-2 rounded-xl mb-1 lg:px-3 lg:py-1">{title}</p>
+      <p className="font-semibold bg-accent/10 text-accent-700 border border-accent-100/70 inline-block px-2 py-1 rounded-xl mb-1 lg:px-3 shadow shadow-accent-200/30">{title}</p>
       <div className="pl-2">
         <p>{company}</p>
         <p>{location}</p>

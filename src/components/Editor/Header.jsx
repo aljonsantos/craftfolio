@@ -2,9 +2,9 @@ import { useContext } from 'react'
 import ThemeContext from '../../contexts/ThemeContext'
 import { IconExpand, IconContract, IconSun, IconMoon } from "../Common/Icons"
 
-const Button = ({ children, onClick }) => {
+const Button = ({ classes, onClick, children }) => {
   return (
-    <button className="text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content/20 hover:text-content hover:border-border/40 hover:scale-105 active:scale-100 transition-all" onClick={onClick} >
+    <button className={`${classes} text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content/20 hover:text-content hover:border-border/40 hover:scale-105 active:scale-100 transition-all`} onClick={onClick} >
       {children}
     </button>
   )
@@ -27,7 +27,7 @@ const Header = ({ fullScreenView, toggleFullScreenView }) => {
             </Button>
           </div>
         </div>
-        <Button onClick={toggleFullScreenView}>
+        <Button classes="btn fullscreen" onClick={toggleFullScreenView}>
           {fullScreenView ? <IconContract /> : <IconExpand />}
         </Button>
       </div>

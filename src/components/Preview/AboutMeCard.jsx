@@ -31,7 +31,7 @@ const Contact = ({ title, info }) => {
 }
 
 const Contacts = ({ show }) => {
-  const transitionClass = `transition-all duration-300 ${show ? 'max-h-full opacity-100 mt-3 md:mt-0' : 'max-h-0 opacity-0'}`
+  const transitionClass = `transition-all duration-300 md:duration-0 ${show ? 'max-h-full opacity-100 mt-3 md:mt-0' : 'max-h-0 opacity-0'}`
   return (
     <div className={`border border-accent-100/70 md:border-0 md:border-t rounded-3xl shadow-lg md:shadow-none md:rounded-none md:max-h-full md:opacity-100 ${transitionClass}`}>
       <div className={`contacts overflow-x-scroll flex flex-wrap gap-3 px-3  md:py-4 md:mt-0 md:max-h-full md:opacity-100 lg:p-5 ${transitionClass}`}>
