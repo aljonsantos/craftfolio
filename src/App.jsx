@@ -11,7 +11,7 @@ import Preview from './components/Preview/Preview'
 
 const App = () => {
   const [fullScreenView, setFullScreenView] = useState(false)
-  const [content, updateContent] = useContentState()
+  const { content, updateContent } = useContentState()
 
   const handleToggleFullScreenView = () => {
     setFullScreenView(!fullScreenView)

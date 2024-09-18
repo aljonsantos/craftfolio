@@ -64,7 +64,7 @@ const useContentState = () => {
     setContent(update(content, keys, value))
   }
 
-  return [content, updateContent]
+  return { content, updateContent }
 }
 
 export default useContentState

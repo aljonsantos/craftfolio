@@ -50,6 +50,7 @@ const ProjectTitle = ({ title, link }) => {
 }
 
 const Projects = () => {
+  
   return (
     <Section title="Projects">
       <div className="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6">
