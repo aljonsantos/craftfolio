@@ -18,8 +18,8 @@ const setDefaultAccentCSSVariables = (theme) => {
     root.style.setProperty('--clr-accent-200', '0deg, 0%, 20%')
     root.style.setProperty('--clr-accent-300', '0deg, 0%, 30%')
     root.style.setProperty('--clr-accent', '0deg, 0%, 50%')
-    root.style.setProperty('--clr-accent-700', '0deg, 0%, 70%')
-    root.style.setProperty('--clr-accent-800', '0deg, 0%, 80%')
+    root.style.setProperty('--clr-accent-700', '0deg, 0%, 80%')
+    root.style.setProperty('--clr-accent-800', '0deg, 0%, 90%')
   }
 }
 

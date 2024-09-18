@@ -48,7 +48,7 @@ const ProjectList = ({ project }) => {
     <AccentComponent>
       <div className="flex flex-col gap-2 px-4 py-4 lg:px-5 lg:py-5">
         <ProjectTitle title={project.title} link={project.link} />
-        <p className="text-content-content">{project.description}</p>
+        <p className="text-content">{project.description}</p>
         <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
         <ProjectTechnologies technologies={project.technologies} />
       </div>
@@ -58,7 +58,7 @@ const ProjectList = ({ project }) => {
 
 const ProjectTitle = ({ title, link }) => {
   return (
-    <a href={link} className="w-max flex gap-2 text-lg font-bold text-accent-700 hover-text-accent-800 transition-all hover:gap-3">
+    <a href={link} className="w-max flex gap-2 text-lg font-bold text-accent-700 hover:text-accent-800 transition-all hover:gap-3">
       {title}
       <IconArrowUpRight classes="mt-1"/>
     </a>

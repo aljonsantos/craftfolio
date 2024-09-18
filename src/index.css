@@ -21,7 +21,7 @@ html {
   :root[data-theme='dark'] {
     --clr-background: 19 19 21;
     --clr-border: 255 255 255;
-    --clr-content: 210 210 210;
+    --clr-content: 200 200 200;
     --clr-content-700: 141 141 141;
     --clr-content-500: 82 82 91;
 
@@ -81,6 +81,10 @@ html {
 
 .overlay {
   z-index: 50;
+}
+
+.title { 
+  z-index: 10;
 }
 
 /* width */
