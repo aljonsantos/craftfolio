@@ -14,7 +14,7 @@ const projects = [
     title: "InvestoGraph",
     link: "",
     image: "/images/image-2.png",
-    description: "Stock Market Data Visualization Tool",
+    description: "Stock Market Data Visualization",
     explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel odio nec nisi dignissim venenatis.",
     technologies: ["React", "D3.js", "Redux"]
   },
@@ -30,12 +30,23 @@ const projects = [
 
 const ProjectCard = ({ project }) => {
   return (
-    <div className="md:min-w-[300px] lg:w-[48%] bg-content-500/10 rounded-2xl bg-image border border-accent-100 overflow-hidden">
+    <div className="md:min-w-[300px] lg:w-[48%] rounded-2xl border border-accent-100 overflow-hidden">
       <img className="mx-auto border-b border-accent-100" src={project.image} alt={project.title} />
-      <div className="px-3 py-2">
+      <div className="px-3 py-2 lg:px-4 lg:py-3">
         <ProjectTitle title={project.title} link={project.link} />
-        <p className="text-content-700">{project.description}</p>
+        <p className="text-sm text-content-700">{project.description}</p>
       </div>
+    </div>
+  )
+}
+
+const ProjectList = ({ project }) => {
+  return (
+    <div className="flex flex-col gap-2 px-3 py-2 lg:px-4 lg:py-3 ">
+      <ProjectTitle title={project.title} link={project.link} />
+      <p className="text-content-content">{project.description}</p>
+      <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
+      <ProjectTechnologies technologies={project.technologies} />
     </div>
   )
 }
@@ -49,12 +60,26 @@ const ProjectTitle = ({ title, link }) => {
   )
 }
 
-const Projects = () => {
+const ProjectTechnologies = ({ technologies }) => {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {technologies.map((tech, index) => (
+        <div key={index} className="text-sm text-accent border border-accent/20 bg-accent/10 px-2 rounded-3xl">{tech}</div>
+      ))}
+    </div>
+  )
+}
+
+const Projects = ({ content }) => {
+  const { layout } = content.pages.projects
   
   return (
     <Section title="Projects">
       <div className="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6">
-        {projects.map((project, index) => <ProjectCard key={index} project={project} />)}
+        {projects.map((project, index) => layout === 'cards'
+          ? <ProjectCard key={index} project={project} />
+          : <ProjectList key={index} project={project} />
+        )}
       </div>
     </Section>
   )

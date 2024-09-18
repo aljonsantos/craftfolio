@@ -14,7 +14,7 @@ const Preview = ({ content, fullScreenView }) => {
 
   const pagesComponent = {
     about: <About content={content} />,
-    projects: <Projects />,
+    projects: <Projects content={content} />,
     blog: <Blog />,
     contact: <Contact />
   }
