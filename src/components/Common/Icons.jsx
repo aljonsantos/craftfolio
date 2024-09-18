@@ -22,6 +22,14 @@ export const IconContract = ({ size = 20  }) => {
   )
 }
 
+export const IconArrowUpRight = ({ size = 14, stroke = 3, classes }) => {
+  return (
+    <svg className={`icon arrow-up-right ${classes}`} width={`${size}px`} height={`${size}px`} fill="none" strokeWidth={stroke} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+    </svg>
+  )
+}
+
 export const IconSun = ({ size = 20 }) => {
   return (
     <svg className="icon sun" width={`${size}px`} height={`${size}px`} fill="none" strokeWidth={1.8} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

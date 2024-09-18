@@ -1,8 +1,61 @@
+import Section from "./Section"
+import { IconArrowUpRight } from "../Common/Icons"
+
+const projects = [
+  {
+    title: "WhisperNet",
+    link: "",
+    image: "/images/image-1.png",
+    description: "Anonymous Feedback Platform",
+    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A platform for users to give and receive anonymous feedback in personal or professional settings.",
+    technologies: ["Node.js", "Express", "MongoDB", "Socket.io", "React"]
+  },
+  {
+    title: "InvestoGraph",
+    link: "",
+    image: "/images/image-2.png",
+    description: "Stock Market Data Visualization Tool",
+    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel odio nec nisi dignissim venenatis.",
+    technologies: ["React", "D3.js", "Redux"]
+  },
+  {
+    title: "Jobify",
+    link: "",
+    image: "/images/image-3.png",
+    description: "Job Application Tracker",
+    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A tool to help users manage job applications, deadlines, and networking opportunities.",
+    technologies: ["Spring Boot", "Vue.js", "MySQL", "Bootstrap"]
+  }
+]
+
+const ProjectCard = ({ project }) => {
+  return (
+    <div className="md:min-w-[300px] lg:w-[48%] bg-content-500/10 rounded-2xl bg-image border border-accent-100 overflow-hidden">
+      <img className="mx-auto border-b border-accent-100" src={project.image} alt={project.title} />
+      <div className="px-3 py-2">
+        <ProjectTitle title={project.title} link={project.link} />
+        <p className="text-content-700">{project.description}</p>
+      </div>
+    </div>
+  )
+}
+
+const ProjectTitle = ({ title, link }) => {
+  return (
+    <a href={link} className="w-max flex gap-2 text-lg font-bold text-accent-700 hover-text-accent-800 transition-all hover:gap-3">
+      {title}
+      <IconArrowUpRight classes="mt-1"/>
+    </a>
+  )
+}
+
 const Projects = () => {
   return (
-    <div id="projects">
-      <p>Projects</p>
-    </div>
+    <Section title="Projects">
+      <div className="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6">
+        {projects.map((project, index) => <ProjectCard key={index} project={project} />)}
+      </div>
+    </Section>
   )
 }
 
