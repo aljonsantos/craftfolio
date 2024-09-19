@@ -3,7 +3,7 @@ import { getEnabledPages } from '../../hooks/useContentState'
 
 import About from './About'
 import Projects from './Projects'
-import Blog from './Blog'
+import Blogs from './Blogs'
 import Contact from './Contact'
 import Navbar from './Navbar'
 import AboutMeCard from './AboutMeCard'
@@ -15,7 +15,7 @@ const Preview = ({ content, fullScreenView }) => {
   const pagesComponent = {
     about: <About content={content} />,
     projects: <Projects content={content} />,
-    blog: <Blog />,
+    blog: <Blogs content={content} />,
     contact: <Contact />
   }
 
