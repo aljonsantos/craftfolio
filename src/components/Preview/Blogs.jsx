@@ -28,7 +28,7 @@ const BlogList = ({ blog }) => {
 
 const BlogCard = ({ blog }) => {
   return (
-    <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]">
+    <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]" border={false}>
       <div className="flex flex-col gap-2 rounded-2xl border border-accent-100 px-3 py-2 lg:px-5 lg:py-4 overflow-hidden">
         <BlogAttributes blog={blog} />
       </div>
@@ -51,7 +51,7 @@ const Blogs = ({ content }) => {
 
   return (
     <Section title="Blogs">
-      <div className={`flex flex-col md:flex-row md:flex-wrap ${layout === 'cards' ? 'gap-4 lg:gap-6' : 'gap-2'}`}>
+      <div className={`flex flex-col justify-starts items-start md:flex-row md:flex-wrap ${layout === 'cards' ? 'gap-4 lg:gap-6' : 'gap-2'}`}>
         {blogs.map((blog, index) => layout === 'cards'
           ? <BlogCard key={index} blog={blog} />
           : <BlogList key={index} blog={blog} />
