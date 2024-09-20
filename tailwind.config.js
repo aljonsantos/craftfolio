@@ -18,7 +18,10 @@ export default {
           700: 'hsla(var(--clr-accent-700), 1)',
           800: 'hsla(var(--clr-accent-800), 1)',
         },
-        "background": 'rgb(var(--clr-background))',
+        background: {
+          DEFAULT: 'rgb(var(--clr-background))',
+          700: 'rgb(var(--clr-background-700))'
+        },
         "border": 'rgb(var(--clr-border))',
         content: {
           DEFAULT: 'rgb(var(--clr-content))',

@@ -9,6 +9,7 @@ html {
 @layer base {
   :root {
     --clr-background: 255 255 255;
+    --clr-backround-700: 255 255 255;
     --clr-border: 0 0 0;
     --clr-content: 9 9 11;
     --clr-content-700: 63 63 70;
@@ -20,6 +21,7 @@ html {
   
   :root[data-theme='dark'] {
     --clr-background: 19 19 21;
+    --clr-background-700: 24 24 24;
     --clr-border: 255 255 255;
     --clr-content: 200 200 200;
     --clr-content-700: 141 141 141;
