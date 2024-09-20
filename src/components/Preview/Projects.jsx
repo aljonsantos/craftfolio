@@ -60,7 +60,7 @@ const ProjectTitle = ({ title, link }) => {
   return (
     <a href={link} className="max-w-[80%] text-base md:text-lg font-bold text-accent-700 hover:text-accent-800 transition-all group">
       <span>{title}</span>
-      <IconArrowUpRight classes="text-xs inline ml-1 mb-1 transition-all group-hover:ml-2" />
+      <IconArrowUpRight classes="text-xs inline ml-1 mb-[3px] transition-all group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
     </a>
   )
 }

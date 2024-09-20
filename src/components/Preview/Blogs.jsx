@@ -51,7 +51,7 @@ const BlogTitle = ({ title, link }) => {
   return (
     <a href={link} className="max-w-[80%] font-semibold text-content-700 hover:text-accent-700 transition-all group">
       {title}
-      <IconArrowUpRight size={11} stroke={2} classes="inline ml-1 mb-1 transition-all group-hover:ml-2" />
+      <IconArrowUpRight size={11} stroke={2} classes="inline ml-1 mb-[3px] transition-all group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
     </a>
   )
 }
