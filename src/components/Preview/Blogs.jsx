@@ -1,18 +1,19 @@
 import AccentComponent from './AccentComponent'
 import Section from './Section'
+import { IconArrowUpRight } from '../Common/Icons'
 
 const blogs = [
   {
     title: 'My Journey with React and Beyond',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     date: '2023-10-28',
-    markdown: '# My Journey with React and Beyond\nLorem ipsum dolor sit amet, consectetur adipiscing elit\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.\n\n## Discovering React\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n## Building My First Project\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet quam id dui posuere blandit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.\n\n## Expanding My Skill Set\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n\n## Looking Ahead\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget tortor risus. Nulla porttitor accumsan tincidunt.'
+    link: ''
   },
   {
     title: 'Exploring the World of Web Development',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.',
     date: '2023-08-28',
-    markdown: '# Exploring the Future of Web Development\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n## 1. Jamstack Architecture\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet est et sapien ullamcorper pharetra. Nulla facilisi.\n\n## 2. Serverless Computing\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nisi libero, fermentum ac nulla a, euismod blandit lorem. Proin scelerisque nunc id magna pretium, vel aliquam ex posuere.\n\n## 3. AI and Machine Learning\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a tincidunt metus. Curabitur ultricies turpis ac lectus tempus, vitae luctus est dictum.\n\n## Conclusion\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tincidunt, ligula eu tincidunt efficitur, risus nunc aliquet nisi, eu pellentesque velit metus nec dui.'
+    link: '',
   }
 ]
 
@@ -40,9 +41,19 @@ const BlogAttributes = ({ blog }) => {
   return (
     <>
       <p className="text-sm text-content-700 max-w-[60ch]">{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
-      <p>{blog.title}</p>
+      {/* <p>{blog.title}</p> */}
+      <BlogTitle title={blog.title} link={blog.link} />
       <p className="text-sm text-content-700">{blog.description}</p>
     </>
+  )
+}
+
+const BlogTitle = ({ title, link }) => {
+  return (
+    <a href={link} className="flex gap-2 hover:gap-3 hover:text-accent-700 transition-all">
+      {title}
+      <IconArrowUpRight size={12} classes="mt-1"/>
+    </a>
   )
 }
 
