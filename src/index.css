@@ -9,7 +9,7 @@ html {
 @layer base {
   :root {
     --clr-background: 255 255 255;
-    --clr-backround-700: 255 255 255;
+    --clr-background-700: 255 255 255;
     --clr-border: 0 0 0;
     --clr-content: 9 9 11;
     --clr-content-700: 63 63 70;
@@ -126,20 +126,30 @@ html {
   display: none;
 }
 
+.main .aboutme-card,
+.main .section .title,
+.main .section-body {
+  padding: 0 24px;
+}
+
 @media (min-width: 768px) {
   .navbar::after {
     content: '';
     width: 100%;
-    height: 150px;
+    height: 140px;
     position: absolute;
     bottom: -20px;
-    background-color: rgb(var(--clr-background) / 0.7);
+    background-color: rgb(var(--clr-background) / 0.5);
     backdrop-filter: saturate(150%) blur(24px);
     z-index: -1;
   }
 
-  .main .section > * {
-    padding: 0 16px;
+  .main .section-body {
+    padding: 0 24px;
+  }
+  
+  .main .aboutme-card {
+    padding: 0;
   }
 }
 

@@ -6,7 +6,9 @@ const Section = ({ title, children }) => {
   return (
     <div id={id} className="section pb-5 pt-3 lg:pb-7">
       <Title title={title} />
-      {children}
+      <div className="section-body">
+        {children}
+      </div>
     </div>
   )
 }

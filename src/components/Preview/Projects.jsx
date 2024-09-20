@@ -34,7 +34,7 @@ const ProjectCard = ({ project }) => {
     <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]" border={false}>
       <div className="rounded-2xl border border-accent-100 overflow-hidden">
         <img className="mx-auto border-b border-accent-100 opacity-20" src={project.image} alt={project.title} />
-        <div className="px-3 py-2 lg:px-4 lg:py-3">
+        <div className="px-3 py-2 md:px-4 md:py-3 lg:px-5 lg:py-4">
             <ProjectTitle title={project.title} link={project.link} />
             <p className="text-sm text-content-700">{project.description}</p>
         </div>
@@ -48,7 +48,7 @@ const ProjectList = ({ project }) => {
     <AccentComponent roundedClass="lg:rounded-2xl">
       <div className="flex flex-col gap-2 py-2 lg:px-4 lg:py-3 lg:pb-4">
         <ProjectTitle title={project.title} link={project.link} />
-        <p className="text-content">{project.description}</p>
+        <p className="text-content-700 font-semibold">{project.description}</p>
         <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
         <ProjectTechnologies technologies={project.technologies} />
       </div>

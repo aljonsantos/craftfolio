@@ -64,8 +64,8 @@ const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
   )
 
   return (
-    <nav className={`navbar fixed md:sticky w-full ${fullScreenView ? 'bottom-[36px]' : 'bottom-[82px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 transition-all duration-500 md:translate-y-0 md:opacity-100 lg:mb-6 ${showNavbar ? 'translate-y-0 opacity-100' : 'translate-y-[200%] opacity-0'}`}>
-      <ul className="flex border capitalize bg-background-700 text-[13px] md:text-[14px] bg-background text-accent-800 border-accent-100 rounded-3xl shadow-lg lg:shadow-xl lg:hover:scale-105 lg:active:scale-100 transition-transform duration-500">
+    <nav className={`navbar fixed md:sticky w-full ${fullScreenView ? 'bottom-[24px]' : 'bottom-[80px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center z-50 md:translate-y-0 md:opacity-100 lg:mb-6 ${showNavbar ? 'translate-y-0' : 'translate-y-[200%]'} transition-all duration-500`}>
+      <ul className="flex border capitalize bg-background-700/10 backdrop-blur-xl backdrop-saturate-150 md:bg-background-700 text-[13px] md:text-[14px] text-accent-800 border-accent-100 rounded-3xl shadow-lg lg:shadow-xl lg:hover:scale-105 lg:active:scale-100 transition-transform duration-500">
         {links}
       </ul>
     </nav>
