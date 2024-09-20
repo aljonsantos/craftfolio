@@ -45,8 +45,8 @@ const ProjectCard = ({ project }) => {
 
 const ProjectList = ({ project }) => {
   return (
-    <AccentComponent>
-      <div className="flex flex-col gap-2 px-4 py-4 lg:px-5 lg:py-5">
+    <AccentComponent roundedClass="lg:rounded-2xl">
+      <div className="flex flex-col gap-2 py-2 lg:px-4 lg:py-3 lg:pb-4">
         <ProjectTitle title={project.title} link={project.link} />
         <p className="text-content">{project.description}</p>
         <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
@@ -58,9 +58,9 @@ const ProjectList = ({ project }) => {
 
 const ProjectTitle = ({ title, link }) => {
   return (
-    <a href={link} className="w-max flex gap-2 text-lg font-bold text-accent-700 hover:text-accent-800 transition-all hover:gap-3">
-      {title}
-      <IconArrowUpRight classes="mt-1"/>
+    <a href={link} className="max-w-[80%] text-base md:text-lg font-bold text-accent-700 hover:text-accent-800 transition-all group">
+      <span>{title}</span>
+      <IconArrowUpRight classes="text-xs inline ml-1 mb-1 transition-all group-hover:ml-2" />
     </a>
   )
 }
@@ -69,7 +69,7 @@ const ProjectTechnologies = ({ technologies }) => {
   return (
     <div className="flex flex-wrap gap-2">
       {technologies.map((tech, index) => (
-        <div key={index} className="text-sm text-accent border border-accent/20 bg-accent/10 px-2 rounded-3xl">{tech}</div>
+        <div key={index} className="text-xs md:text-sm text-accent border border-accent/20 bg-accent/10 px-2 rounded-3xl">{tech}</div>
       ))}
     </div>
   )

@@ -20,7 +20,7 @@ const blogs = [
 const BlogList = ({ blog }) => {
   return (
     <AccentComponent>
-      <div className="flex flex-col gap-2 px-4 py-4 lg:px-5 lg:py-5">
+      <div className="flex flex-col gap-2 py-2 lg:px-4 lg:py-3">
         <BlogAttributes blog={blog} />
       </div>
     </AccentComponent>
@@ -30,7 +30,7 @@ const BlogList = ({ blog }) => {
 const BlogCard = ({ blog }) => {
   return (
     <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]" border={false}>
-      <div className="flex flex-col gap-2 rounded-2xl border border-accent-100 px-3 py-2 lg:px-5 lg:py-4 overflow-hidden">
+      <div className="flex flex-col gap-1 md:gap-2 rounded-2xl border border-accent-100 px-3 py-2 lg:px-5 lg:py-4 overflow-hidden">
         <BlogAttributes blog={blog} />
       </div>
     </AccentComponent>
@@ -40,8 +40,7 @@ const BlogCard = ({ blog }) => {
 const BlogAttributes = ({ blog }) => {
   return (
     <>
-      <p className="text-sm text-content-700 max-w-[60ch]">{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
-      {/* <p>{blog.title}</p> */}
+      <p className="text-xs text-content-700 max-w-[60ch]">{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
       <BlogTitle title={blog.title} link={blog.link} />
       <p className="text-sm text-content-700">{blog.description}</p>
     </>
@@ -50,9 +49,9 @@ const BlogAttributes = ({ blog }) => {
 
 const BlogTitle = ({ title, link }) => {
   return (
-    <a href={link} className="flex gap-2 hover:gap-3 hover:text-accent-700 transition-all">
+    <a href={link} className="max-w-[80%] font-semibold text-content hover:text-accent-700 transition-all group">
       {title}
-      <IconArrowUpRight size={12} classes="mt-1"/>
+      <IconArrowUpRight size={11} stroke={2} classes="inline ml-1 mb-1 transition-all group-hover:ml-2" />
     </a>
   )
 }
