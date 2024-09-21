@@ -42,7 +42,7 @@ const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', border
   return (
     <div className={`accent relative inline overflow-clip ${widthClass} ${roundedClass} border border-transparent ${border ? 'lg:hover:border-accent-300/20' : ''}`} ref={ref}>
       <div
-        className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[200px] aspect-square bg-accent/50 saturate-150 blur-[124px] rounded-full z-30 pointer-events-none transition-opacity duration-500`}
+        className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[200px] aspect-square bg-accent/50 saturate-150 blur-[124px] rounded-full z-40 pointer-events-none transition-opacity duration-500`}
         style={{
           left: `${cursorPos.x}px`,
           top: `${cursorPos.y}px`,

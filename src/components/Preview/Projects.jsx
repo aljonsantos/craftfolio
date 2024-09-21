@@ -1,5 +1,6 @@
 import AccentComponent from "./AccentComponent"
 import Section from "./Section"
+import Masonry from "./Masonry"
 import { IconArrowUpRight } from "../Common/Icons"
 
 const projects = [
@@ -24,19 +25,29 @@ const projects = [
     link: "",
     image: "/images/image-3.png",
     description: "Job Application Tracker",
-    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A tool to help users manage job applications, deadlines, and networking opportunities.",
+    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A tool to help users manage job applications.",
     technologies: ["Spring Boot", "Vue.js", "MySQL", "Bootstrap"]
+  },
+  {
+    title: "Creation AI",
+    link: "",
+    image: "/images/image-1.png",
+    description: "AI Model Training Platform",
+    explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. A platform for training and deploying AI models using TensorFlow.",
+    technologies: ["Python", "TensorFlow", "Flask", "Docker"]
   }
 ]
 
 const ProjectCard = ({ project }) => {
   return (
-    <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]" border={false}>
-      <div className="rounded-2xl border border-accent-100 overflow-hidden">
-        <img className="mx-auto border-b border-accent-100 opacity-20" src={project.image} alt={project.title} />
-        <div className="px-3 py-2 md:px-4 md:py-3 lg:px-5 lg:py-4">
+    <AccentComponent widthClass="" border={false}>
+      <div className="rounded-2xl border border-accent-300/30 overflow-hidden">
+        <img className="mx-auto border-b border-accent-300/30 opacity-20" src={project.image} alt={project.title} />
+        <div className="flex flex-col gap-1 lg:gap-2 px-3 py-2 md:px-4 md:py-3 lg:px-5 lg:py-4">
             <ProjectTitle title={project.title} link={project.link} />
-            <p className="text-sm text-content-700">{project.description}</p>
+            <p className="text-content">{project.description}</p>
+            <p className="text-sm text-content-700">{project.explanation}</p>
+            <ProjectTechnologies technologies={project.technologies} />
         </div>
       </div>
     </AccentComponent>
@@ -46,7 +57,7 @@ const ProjectCard = ({ project }) => {
 const ProjectList = ({ project }) => {
   return (
     <AccentComponent roundedClass="lg:rounded-2xl">
-      <div className="flex flex-col gap-2 py-2 lg:px-4 lg:py-3 lg:pb-4">
+      <div className="flex flex-col gap-2 py-2 lg:px-5 lg:py-4">
         <ProjectTitle title={project.title} link={project.link} />
         <p className="text-content-700 font-semibold">{project.description}</p>
         <p className="text-content-700 max-w-[60ch]">{project.explanation}</p>
@@ -58,7 +69,7 @@ const ProjectList = ({ project }) => {
 
 const ProjectTitle = ({ title, link }) => {
   return (
-    <a href={link} className="max-w-[80%] text-base md:text-lg font-bold text-accent-700 hover:text-accent-800 transition-all group">
+    <a href={link} className="max-w-[95%] text-base md:text-lg font-bold text-accent-700 hover:text-accent-800 transition-all group">
       <span>{title}</span>
       <IconArrowUpRight classes="text-xs inline ml-1 mb-[3px] transition-all group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
     </a>
@@ -67,9 +78,9 @@ const ProjectTitle = ({ title, link }) => {
 
 const ProjectTechnologies = ({ technologies }) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2 py-1">
       {technologies.map((tech, index) => (
-        <div key={index} className="text-xs md:text-sm text-accent border border-accent/20 bg-accent/10 px-2 rounded-3xl">{tech}</div>
+        <div key={index} className="text-xs text-accent border border-accent/20 bg-accent/10 px-2 rounded-3xl">{tech}</div>
       ))}
     </div>
   )
@@ -77,15 +88,28 @@ const ProjectTechnologies = ({ technologies }) => {
 
 const Projects = ({ content }) => {
   const { layout } = content.pages.projects
+
+  const items = projects.map((p, i) => layout === 'cards'
+    ? <ProjectCard key={i} project={p} />
+    : <ProjectList key={i} project={p} />
+  )
+
+  const view = {
+    cards: (
+      <Masonry minColWidth={218} numCols={2} >
+        {items}
+      </Masonry>
+    ),
+    list: (
+      <div className="flex flex-col gap-2">
+        {items}
+      </div>
+    )
+  }
   
   return (
     <Section title="Projects">
-      <div className={`flex flex-col md:flex-row md:flex-wrap ${layout === 'cards' ? 'gap-4 lg:gap-6' : 'gap-2'}`}>
-        {projects.map((project, index) => layout === 'cards'
-          ? <ProjectCard key={index} project={project} />
-          : <ProjectList key={index} project={project} />
-        )}
-      </div>
+      {view[layout]}
     </Section>
   )
 }

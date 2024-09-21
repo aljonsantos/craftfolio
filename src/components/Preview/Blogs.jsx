@@ -1,5 +1,6 @@
 import AccentComponent from './AccentComponent'
 import Section from './Section'
+import Masonry from './Masonry'
 import { IconArrowUpRight } from '../Common/Icons'
 
 const blogs = [
@@ -29,8 +30,8 @@ const BlogList = ({ blog }) => {
 
 const BlogCard = ({ blog }) => {
   return (
-    <AccentComponent widthClass="md:min-w-[300px] lg:w-[48%]" border={false}>
-      <div className="flex flex-col gap-1 md:gap-2 rounded-2xl border border-accent-100 px-3 py-2 md:px-4 md:py-3 lg:px-5 lg:py-4 overflow-hidden">
+    <AccentComponent widthClass="w-full" border={false}>
+      <div className="flex flex-col gap-1 md:gap-2 rounded-2xl border border-accent-300/30 p-3 md:px-4 md:py-3 lg:px-5 lg:py-4 overflow-hidden">
         <BlogAttributes blog={blog} />
       </div>
     </AccentComponent>
@@ -40,7 +41,7 @@ const BlogCard = ({ blog }) => {
 const BlogAttributes = ({ blog }) => {
   return (
     <>
-      <p className="text-xs text-content-700 max-w-[60ch]">{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+      <p className="text-xs text-content-700">{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
       <BlogTitle title={blog.title} link={blog.link} />
       <p className="text-sm text-content-700">{blog.description}</p>
     </>
@@ -49,7 +50,7 @@ const BlogAttributes = ({ blog }) => {
 
 const BlogTitle = ({ title, link }) => {
   return (
-    <a href={link} className="max-w-[80%] font-semibold text-content-700 hover:text-accent-700 transition-all group">
+    <a href={link} className="max-w-[95%] font-semibold text-content-700 hover:text-accent-700 transition-all group">
       {title}
       <IconArrowUpRight size={11} stroke={2} classes="inline ml-1 mb-[3px] transition-all group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
     </a>
@@ -59,14 +60,27 @@ const BlogTitle = ({ title, link }) => {
 const Blogs = ({ content }) => {
   const { layout } = content.pages.blog
 
+  const items = blogs.map((b, i) => layout === 'cards'
+    ? <BlogCard key={i} blog={b} />
+    : <BlogList key={i} blog={b} />
+  )
+
+  const view = {
+    cards: (
+      <Masonry minColWidth={218} numCols={2} >
+        {items}
+      </Masonry>
+    ),
+    list: (
+      <div className="flex flex-col gap-2">
+        {items}
+      </div>
+    )
+  }
+
   return (
     <Section title="Blogs">
-      <div className={`flex flex-col justify-starts items-start md:flex-row md:flex-wrap ${layout === 'cards' ? 'gap-4 lg:gap-6' : 'gap-2'}`}>
-        {blogs.map((blog, index) => layout === 'cards'
-          ? <BlogCard key={index} blog={blog} />
-          : <BlogList key={index} blog={blog} />
-        )}
-      </div>
+      {view[layout]}
     </Section>
   )
 }

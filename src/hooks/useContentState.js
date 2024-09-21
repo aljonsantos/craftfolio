@@ -13,7 +13,7 @@ const defaultContent = {
     },
     blog: {
       enabled: true,
-      layout: 'card'
+      layout: 'cards'
     },
     contact:{
       enabled: true
