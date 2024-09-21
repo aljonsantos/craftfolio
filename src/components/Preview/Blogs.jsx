@@ -79,7 +79,7 @@ const Blogs = ({ content }) => {
   }
 
   return (
-    <Section title="Blogs">
+    <Section title="Blog" classes="nav-section">
       {view[layout]}
     </Section>
   )

@@ -108,7 +108,7 @@ const Projects = ({ content }) => {
   }
   
   return (
-    <Section title="Projects">
+    <Section title="Projects" classes="nav-section">
       {view[layout]}
     </Section>
   )

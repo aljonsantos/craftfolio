@@ -9,7 +9,7 @@ const About = ({ content }) => {
   const { sections } = content.pages.about
 
   return (
-    <div id="about" className="flex flex-col lg:gap-3">
+    <div className="flex flex-col lg:gap-3">
       <AboutMe />
       { sections.includes('education') && <Education /> }
       { sections.includes('experience') && <Experience /> }
