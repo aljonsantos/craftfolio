@@ -5,38 +5,65 @@ const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
   const enabledPages = getEnabledPages(content)
 
   const handleClick = (e) => {
+    e.preventDefault()
+    
+    // scroll to the clicked nav-section
     if (content.page === 'single') {
-      // scrollTo
+      const container = fullScreenView ? window : document.querySelector('.previewer')
+      
+      const target = document.querySelector(`#${e.target.dataset.navSection}`)
+      const targetRectTop = target.getBoundingClientRect().top
+      let offset =  window.innerWidth < 768 ? 0 : 150
+      
+      const targetOffset = fullScreenView
+      ? targetRectTop + window.pageYOffset
+      : targetRectTop + container.scrollTop - container.getBoundingClientRect().top
+      
+      container.scrollTo({
+        top: targetOffset - offset,
+        behavior: 'smooth'
+      })
     }
-    else {
-      e.preventDefault()
-      setActivePage(e.target.dataset.page)
-    }
+
+    setActivePage(e.target.dataset.navSection)
   }
 
   useEffect(() => {
     if (content.page === 'single') {
       const sections = document.querySelectorAll('.nav-section')
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActivePage(entry.target.id)
+      const container = fullScreenView
+        ? window
+        : document.querySelector('.previewer')
+  
+      const handleScroll = () => {
+        let activeSection
+  
+        sections.forEach((section) => {
+          const { top, bottom } = section.getBoundingClientRect()
+          const viewportHeight = fullScreenView 
+            ? window.innerHeight 
+            : document.querySelector('.previewer').clientHeight
+
+          // check if the section covers more than 50% of the viewport/container height
+          if (top < viewportHeight / 2 && bottom > viewportHeight / 2) {
+            activeSection = section.id
           }
         })
-      }, {
-        root: null,
-        threshold: 0.5
-      })
-
-      sections.forEach((section) => observer.observe(section))
+  
+        setActivePage(activeSection)
+      }
+  
+      container.addEventListener('scroll', handleScroll)
+      handleScroll()
+  
       return () => {
-        sections.forEach((section) => observer.unobserve(section))
+        container.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [content.page, setActivePage])
+  }, [content.page, fullScreenView, setActivePage])
 
   let links = enabledPages.map(
-    page => <li key={page}><a href={`#${page}`} data-page={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li>
+    page => <li key={page}><a href="" data-nav-section={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li>
   )
 
   return (
