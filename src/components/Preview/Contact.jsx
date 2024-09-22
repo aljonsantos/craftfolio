@@ -1,8 +1,98 @@
-const Contact = () => {
+import { useState } from 'react'
+import Section from './Section'
+import { IconArrowRightCircle, IconExclamationCircle } from '../Common/Icons'
+
+const Input = ({ type, id, name, placeholder, value, onChange, error, onTouch, touched }) => {
+  
   return (
-    <div id="contact">
-      <p>Contact</p>
+    <div className="w-full relative">
+      <input className="w-full px-3 py-2 lg:px-4 lg:py-3 rounded-xl bg-background border border-border/20 focus:outline-0 focus:border-accent-200 text-content peer"
+        type={type} id={id} name={name} value={value} onChange={onChange} onKeyDown={onTouch}
+      />
+      <label htmlFor={id} className={`absolute left-3 lg:left-4 -translate-y-1/2 ${value ? 'bg-accent-200 top-0 text-xs px-2 text-content' : 'top-1/2'} text-accent-700 rounded-full peer-focus:bg-accent-200 peer-focus:top-0 peer-focus:text-xs peer-focus:px-2 peer-focus:text-content transition-all`}>{placeholder}</label>
+      {error && touched && <IconExclamationCircle classes="absolute right-3 lg:right-4 top-1/2 -translate-y-1/2 text-red-500" />}
     </div>
+  )
+}
+
+const Textarea = ({ id, name, placeholder, value, onChange, error, onTouch, touched }) => {
+  return (
+    <div className="w-full relative">
+      <textarea className="w-full h-32 min-h-min max-h-60 px-3 py-2 lg:px-4 lg:py-3 rounded-xl bg-background border border-border/20 focus:outline-0 focus:border-accent-200 text-content whitespace-pre peer"
+        id={id} name={name} value={value} onChange={onChange} onKeyDown={onTouch}
+      />
+      <label htmlFor={id} className={`absolute left-3 lg:left-4 ${value ? 'bg-accent-200 top-0 -translate-y-1/2 text-xs px-2 text-content' : 'top-2 lg:top-3'} text-accent-700 rounded-full peer-focus:bg-accent-200 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-xs peer-focus:px-2 peer-focus:text-content transition-all`}>{placeholder}</label>
+      {error && touched && <IconExclamationCircle classes="absolute right-3 lg:right-4 top-5 lg:top-6 -translate-y-1/2 text-red-500" />}
+    </div>
+  )
+}
+
+
+const Contact = () => {
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+
+  const [error, setError] = useState({
+    name: true,
+    email: true,
+    message: true
+  })
+
+  const [touch, setTouch] = useState({
+    name: false,
+    email: false,
+    message: false
+  })
+
+  const validatetor = {
+    name: (v) => !v,
+    email: (v) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+    message: (v) => !v
+  }
+
+  const handleTouch = (e) => {
+    const { name } = e.target
+    setTouch({ ...touch, [name]: true })
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setData({ ...data, [name]: value })
+    setError({ ...error, [name]: validatetor[name](value) })
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    const email = 'example@email.com'
+    const message = `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`
+    const body = message.replace(/\n/g, '%0D%0A')
+    
+    if (Object.values(error).some(e => e)) return
+
+    window.open(`mailto:${email}?subject=Contact&body=${body}`)
+  }
+
+  return (
+    <Section title="Contact" classes="nav-section">
+      <div>
+        <p className="lg:text-lg text-content-700 mb-5 lg:mb-7 lg:ml-1">Contact Form</p>
+        <form className="flex flex-col gap-5 lg:gap-7" onSubmit={handleSubmit}>
+          <div className="flex flex-col lg:flex-row lg:justify-between gap-5 lg:gap-7">
+            <Input type="text" id="name" name="name" placeholder="Name" value={data.name} error={error.name} touched={touch.name} onChange={handleChange} onTouch={handleTouch}/>
+            <Input type="email" id="email" name="email" placeholder="Email" value={data.email} error={error.email} touched={touch.email} onChange={handleChange} onTouch={handleTouch}/>
+          </div>
+          <Textarea id="message" name="message" placeholder="Message" value={data.message} error={error.message} touched={touch.message} onChange={handleChange} onTouch={handleTouch}/>
+          <button className="self-end flex items-center gap-2 bg-accent-200/70 text-accent-800 px-4 py-2 rounded-full border border-border/20 hover:border-accent-800 hover:text-accent-800 hover:bg-accent-200 active:scale-95 transition-all duration-300">
+            <span>Send</span>
+            <IconArrowRightCircle />
+          </button>
+        </form>
+      </div>
+    </Section>
   )
 }
 

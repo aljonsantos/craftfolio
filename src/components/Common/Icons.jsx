@@ -30,6 +30,22 @@ export const IconArrowUpRight = ({ size = 14, stroke = 3, classes }) => {
   )
 }
 
+export const IconArrowRightCircle = ({ size = 20 }) => {
+  return (
+    <svg className="icon arrow-right-circle" width={`${size}px`} height={`${size}px`} fill="none" strokeWidth={1.8} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    </svg>
+  )
+}
+
+export const IconExclamationCircle = ({ size = 20, classes }) => {
+  return (
+    <svg className={`icon exclamation-circle ${classes}`} width={`${size}px`} height={`${size}px`} fill="none" strokeWidth={1.8} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+    </svg>
+  )
+}
+
 export const IconSun = ({ size = 20 }) => {
   return (
     <svg className="icon sun" width={`${size}px`} height={`${size}px`} fill="none" strokeWidth={1.8} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
