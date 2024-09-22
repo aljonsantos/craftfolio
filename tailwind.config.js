@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import cq from '@tailwindcss/container-queries'
+
 export default {
   content: [
     "./index.html",
@@ -34,6 +36,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [cq],
 }
 
