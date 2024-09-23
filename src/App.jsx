@@ -22,7 +22,7 @@ const App = () => {
     <ThemeContextProvider>
       <div className={`app ${fullscreen ? 'full' : ''}`}>
         <div className="main-wrapper">
-          <Header />
+          <Header content={content} />
           {fullscreen
             ? <Preview content={content} />
             : <Previewer content={content} />}

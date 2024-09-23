@@ -11,8 +11,8 @@ const Button = ({ classes, onClick, children }) => {
   )
 }
 
-const Header = () => {
-  const { fullscreen, toggleFullScreen } = useContext(AppContext)
+const Header = ({ content }) => {
+  const { fullscreen, toggleFullScreen, activePage } = useContext(AppContext)
   const {theme, toggleTheme} = useContext(ThemeContext)
 
   return (
@@ -21,7 +21,7 @@ const Header = () => {
         <div className="content w-full flex items-center justify-between mr-3">
           <div>
             <h1 className="text-2xl font-bold">Preview</h1>
-            <p className="text-xs text-content-700">me.com</p>
+            <p className="text-xs text-content-700">{`example.com${content.page === 'multi' ? `/${activePage}` : '' }`}</p>
           </div>
           <div>
             <Button onClick={toggleTheme}>
