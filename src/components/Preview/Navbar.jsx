@@ -60,7 +60,7 @@ const Navbar = ({ content, activePage, setActivePage, fullScreenView }) => {
         container.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [content.page, fullScreenView, setActivePage])
+  }, [content.page, fullScreenView, setActivePage, enabledPages])
 
   let links = enabledPages.map(
     page => <li key={page}><a href="" data-nav-section={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li>
