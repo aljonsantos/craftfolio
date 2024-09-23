@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import './index.css'
 
+import AppContext from './contexts/AppContext'
 import useContentState from './hooks/useContentState'
 import { ThemeContextProvider } from './contexts/ThemeContext'
 
@@ -10,12 +11,8 @@ import EditorPanel from './components/Editor/EditorPanel'
 import Preview from './components/Preview/Preview'
 
 const App = () => {
-  const [fullScreenView, setFullScreenView] = useState(false)
+  const { fullscreen } = useContext(AppContext)
   const { content, updateContent } = useContentState()
-
-  const handleToggleFullScreenView = () => {
-    setFullScreenView(!fullScreenView)
-  }
 
   const handleUpdateContent = (key, value) => {
     updateContent(key, value)
@@ -23,11 +20,11 @@ const App = () => {
 
   return (
     <ThemeContextProvider>
-      <div className={`app ${fullScreenView ? 'full' : ''}`}>
+      <div className={`app ${fullscreen ? 'full' : ''}`}>
         <div className="main-wrapper">
-          <Header fullScreenView={fullScreenView} toggleFullScreenView={handleToggleFullScreenView} />
-          {fullScreenView 
-            ? <Preview content={content} fullScreenView={fullScreenView} />
+          <Header />
+          {fullscreen
+            ? <Preview content={content} />
             : <Previewer content={content} />}
         </div>
         <EditorPanel content={content} onUpdateContent={handleUpdateContent} />

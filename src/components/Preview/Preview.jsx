@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext } from 'react'
+import AppContext from '../../contexts/AppContext'
 import { getEnabledPages } from '../../hooks/useContentState'
 
 import About from './About'
@@ -8,9 +9,9 @@ import Contact from './Contact'
 import Navbar from './Navbar'
 import AboutMeCard from './AboutMeCard'
 
-const Preview = ({ content, fullScreenView }) => {
+const Preview = ({ content }) => {
+  const { activePage } = useContext(AppContext)
   const enabledPages = getEnabledPages(content)
-  const [activePage, setActivePage] = useState('about')
 
   const pagesComponent = {
     about: <About content={content} />,
@@ -34,7 +35,7 @@ const Preview = ({ content, fullScreenView }) => {
         <AboutMeCard />
       </div>
       <div className="relative w-full">
-        <Navbar content={content} activePage={activePage} setActivePage={setActivePage} fullScreenView={fullScreenView} />
+        <Navbar content={content} />
         {pages}
       </div>
     </div>

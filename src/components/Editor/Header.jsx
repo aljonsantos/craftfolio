@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import ThemeContext from '../../contexts/ThemeContext'
+import AppContext from '../../contexts/AppContext'
 import { IconExpand, IconContract, IconSun, IconMoon } from "../Common/Icons"
 
 const Button = ({ classes, onClick, children }) => {
@@ -10,11 +11,12 @@ const Button = ({ classes, onClick, children }) => {
   )
 }
 
-const Header = ({ fullScreenView, toggleFullScreenView }) => {
+const Header = () => {
+  const { fullscreen, toggleFullScreen } = useContext(AppContext)
   const {theme, toggleTheme} = useContext(ThemeContext)
 
   return (
-    <div className={`header ${fullScreenView ? 'transparent border-none shadow-none' : 'bg-background'} px-5 py-4 border-solid border border-t-0 border-border/20 rounded-b-2xl shadow-2xl lg:shadow-none lg:border-none`}>
+    <div className={`header ${fullscreen ? 'transparent border-none shadow-none' : 'bg-background'} px-5 py-4 border-solid border border-t-0 border-border/20 rounded-b-2xl shadow-2xl lg:shadow-none lg:border-none`}>
       <div className="flex justify-between items-center max-w-[500px] md:max-w-[700px] lg:max-w-full mx-auto">
         <div className="content w-full flex items-center justify-between mr-3">
           <div>
@@ -27,8 +29,8 @@ const Header = ({ fullScreenView, toggleFullScreenView }) => {
             </Button>
           </div>
         </div>
-        <Button classes="btn fullscreen" onClick={toggleFullScreenView}>
-          {fullScreenView ? <IconContract /> : <IconExpand />}
+        <Button classes="btn fullscreen" onClick={toggleFullScreen}>
+          {fullscreen ? <IconContract /> : <IconExpand />}
         </Button>
       </div>
     </div>
