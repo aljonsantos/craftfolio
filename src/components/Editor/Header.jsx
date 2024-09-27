@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import ThemeContext from '../../contexts/ThemeContext'
 import AppContext from '../../contexts/AppContext'
-import { IconExpand, IconContract, IconSun, IconMoon } from "../Common/Icons"
+import { IconExpand, IconContract, IconSun, IconMoon, IconDownload } from "../Common/Icons"
+
+import downloadCode from '../../services/downloadCode'
 
 const Button = ({ classes, onClick, children }) => {
   return (
@@ -23,9 +25,12 @@ const Header = ({ content }) => {
             <h1 className="text-2xl font-bold">Preview</h1>
             <p className="text-xs text-content-700">{`example.com${content.page === 'multi' ? `/${activePage}` : '' }`}</p>
           </div>
-          <div>
+          <div className="flex gap-3">
             <Button onClick={toggleTheme}>
               {theme === 'light' ? <IconMoon /> : <IconSun />}
+            </Button>
+            <Button onClick={() => downloadCode(content)}>
+              <IconDownload />
             </Button>
           </div>
         </div>
