@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { IconArrowUp } from '../Common/Icons.jsx'
+import { IconArrowUp } from './Icons.jsx'
 
 const Collapsible = ({ headerEl, type, toggleLabel, noSeparator, children }) => {
   const [expanded, setExpanded] = useState(false)

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Section from './Section'
-import { IconArrowRightCircle, IconExclamationCircle } from '../Common/Icons'
+import { IconArrowRightCircle, IconExclamationCircle } from './Icons'
 
 const Input = ({ type, id, name, placeholder, value, onChange, error, onTouch, touched }) => {
   

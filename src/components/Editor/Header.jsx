@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import ThemeContext from '../../contexts/ThemeContext'
 import AppContext from '../../contexts/AppContext'
-import { IconExpand, IconContract, IconSun, IconMoon, IconDownload } from "../Common/Icons"
+import { IconExpand, IconContract, IconSun, IconMoon, IconDownload } from "./Icons"
 
 import downloadCode from '../../services/downloadCode'
 

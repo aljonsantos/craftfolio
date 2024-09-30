@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IconArrowUp, IconGithub, IconLinkedIn, IconTwitterX, IconInstagram, IconFacebook } from '../Common/Icons'
+import { IconArrowUp, IconGithub, IconLinkedIn, IconTwitterX, IconInstagram, IconFacebook } from './Icons'
 
 const Social = ({ link, children }) => {
   return (

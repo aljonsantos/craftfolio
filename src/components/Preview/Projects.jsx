@@ -1,7 +1,7 @@
 import AccentComponent from "./AccentComponent"
 import Section from "./Section"
 import Masonry from "./Masonry"
-import { IconArrowUpRight } from "../Common/Icons"
+import { IconArrowUpRight } from "./Icons"
 
 const projects = [
   {

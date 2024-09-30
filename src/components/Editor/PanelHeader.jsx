@@ -1,4 +1,4 @@
-import { IconArrowUp } from "../Common/Icons"
+import { IconArrowUp } from "./Icons"
 
 const PanelHeader = ({ open, togglePanel }) => {
   return (
