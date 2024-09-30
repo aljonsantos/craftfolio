@@ -8,10 +8,10 @@ const Navbar = ({ content }) => {
 
   const handleClick = (e) => {
     const container = fullscreen ? window : document.querySelector('.previewer')
-    e.preventDefault()
     
     // scroll to the clicked nav-section
     if (content.page === 'single') {
+      e.preventDefault()
       
       const target = document.querySelector(`#${e.target.dataset.navSection}`)
       const targetRectTop = target.getBoundingClientRect().top
@@ -46,9 +46,13 @@ const Navbar = ({ content }) => {
             ? window.innerHeight 
             : document.querySelector('.previewer').clientHeight
 
-          // check if the section covers more than 50% of the viewport/container height
-          if (top < viewportHeight / 2 && bottom > viewportHeight / 2) {
-            activeSection = section.id
+          if (container.scrollY === 0) {
+            activeSection = sections[0].id
+          } else {
+            // check if the section covers more than 50% of the viewport/container height
+            if (top < viewportHeight / 2 && bottom > viewportHeight / 2) {
+              activeSection = section.id
+            }
           }
         })
   
