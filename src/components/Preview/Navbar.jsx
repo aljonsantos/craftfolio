@@ -7,11 +7,11 @@ const Navbar = ({ content }) => {
   const enabledPages = getEnabledPages(content)
 
   const handleClick = (e) => {
+    e.preventDefault()
     const container = fullscreen ? window : document.querySelector('.previewer')
     
     // scroll to the clicked nav-section
     if (content.page === 'single') {
-      e.preventDefault()
       
       const target = document.querySelector(`#${e.target.dataset.navSection}`)
       const targetRectTop = target.getBoundingClientRect().top
