@@ -1,7 +1,6 @@
 import { useContext } from 'react'
-import ThemeContext from '../../contexts/ThemeContext'
 import AppContext from '../../contexts/AppContext'
-import { IconExpand, IconContract, IconSun, IconMoon, IconDownload } from "./Icons"
+import { IconExpand, IconContract, IconDownload } from "./Icons"
 
 import downloadCode from '../../services/downloadCode'
 
@@ -15,7 +14,6 @@ const Button = ({ classes, onClick, children }) => {
 
 const Header = ({ content }) => {
   const { fullscreen, toggleFullScreen, activePage } = useContext(AppContext)
-  const {theme, toggleTheme} = useContext(ThemeContext)
 
   const handleDownload = async (content) => {
     const data = await downloadCode(content)
@@ -39,9 +37,6 @@ const Header = ({ content }) => {
             <p className="text-xs text-content-700">{`example.com${content.page === 'multi' ? `/${activePage}` : '' }`}</p>
           </div>
           <div className="flex gap-3">
-            <Button onClick={toggleTheme}>
-              {theme === 'light' ? <IconMoon /> : <IconSun />}
-            </Button>
             <Button onClick={() => handleDownload(content)}>
               <IconDownload />
             </Button>
