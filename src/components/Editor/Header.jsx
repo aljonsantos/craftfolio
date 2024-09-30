@@ -17,6 +17,19 @@ const Header = ({ content }) => {
   const { fullscreen, toggleFullScreen, activePage } = useContext(AppContext)
   const {theme, toggleTheme} = useContext(ThemeContext)
 
+  const handleDownload = async (content) => {
+    const data = await downloadCode(content)
+
+    const url = window.URL.createObjectURL(new Blob([data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', 'code.zip')
+    document.body.appendChild(link)
+    link.click()
+    
+    document.body.removeChild(link)
+  }
+
   return (
     <div className={`header ${fullscreen ? 'transparent border-none shadow-none' : 'bg-background'} px-5 py-4 border-solid border border-t-0 border-border/20 rounded-b-2xl shadow-2xl lg:shadow-none lg:border-none`}>
       <div className="flex justify-between items-center max-w-[500px] md:max-w-[700px] lg:max-w-full mx-auto">
@@ -29,7 +42,7 @@ const Header = ({ content }) => {
             <Button onClick={toggleTheme}>
               {theme === 'light' ? <IconMoon /> : <IconSun />}
             </Button>
-            <Button onClick={() => downloadCode(content)}>
+            <Button onClick={() => handleDownload(content)}>
               <IconDownload />
             </Button>
           </div>
