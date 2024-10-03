@@ -4,6 +4,7 @@ const Masonry = ({ minColWidth, numCols, children }) => {
   const containerRef = useRef(null)
   const childrenCount = useRef(children.length)
   const [containerWidth, setContainerWidth] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(0)
   
   useEffect(() => {
     const container = containerRef.current
@@ -41,6 +42,8 @@ const Masonry = ({ minColWidth, numCols, children }) => {
     }
 
     const handleResize = () => {
+      if (!imagesLoaded) return
+      
       setContainerWidth(container.offsetWidth)
 
       if (numCols < 2) {
@@ -62,13 +65,19 @@ const Masonry = ({ minColWidth, numCols, children }) => {
       childrenCount.current = children.length
     }
 
+    Promise.all(Array.from(container.querySelectorAll('img')).filter(img => !img.complete).map(img => 
+      new Promise(resolve => { img.onload = img.onerror = resolve; })))
+      .then(() => {
+        setImagesLoaded(true)
+    })
+
     handleResize()
 
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [children.length, containerWidth, minColWidth, numCols])
+  }, [children.length, containerWidth, minColWidth, numCols, imagesLoaded])
 
   return (
     <div className="masonry flex flex-col flex-wrap items-start gap-3 lg:gap-5" ref={containerRef}>
