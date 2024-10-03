@@ -32,6 +32,10 @@ html {
   }
 }
 
+code {
+  font-family: 'Space Mono';
+}
+
 .header {
   height: 82px;
   position: fixed;
@@ -77,12 +81,16 @@ html {
   margin: 0 auto;
 }
 
-.header, .editor-panel {
+.header {
+  z-index: 60;
+}
+
+.editor-panel {
   z-index: 80;
 }
 
 .overlay {
-  z-index: 50;
+  z-index: 70;
 }
 
 .title { 
