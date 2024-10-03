@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext } from 'react'
 import AppContext from '../../contexts/AppContext'
 import Dropdown from './Dropdown'
 import { IconExpand, IconContract, IconDownload } from "./Icons"
@@ -40,14 +40,12 @@ const DropdownContentDownload = ({ onDownload }) => {
 
 const Header = ({ content }) => {
   const { fullscreen, toggleFullScreen, activePage } = useContext(AppContext)
-  // const downloadLinkRef = useRef(null)
   const [isDownloading, setIsDownloading] = useState(false)
 
   const handleDownload = async (content) => {
-    console.log('download clicked')
     if (isDownloading) return
     setIsDownloading(true)
-    console.log('download fired')
+
     try {
       const data = await downloadCode(content)
 
@@ -56,10 +54,7 @@ const Header = ({ content }) => {
       }
 
       const url = window.URL.createObjectURL(new Blob([data], { type: 'application/zip' }))
-      console.log('Blob URL created:', url)
-
       const link = document.createElement('a')
-      // link.href = `${url}?t=${new Date().getTime()}`
       link.href = url
       link.setAttribute('download', 'craftfolio.zip')
       document.body.appendChild(link)

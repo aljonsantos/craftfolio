@@ -80,7 +80,6 @@ const ColorInput = ({ color, onChange }) => {
 
   const handleChoiceChange = (e) => {
     const value = e.target.value
-    console.log(value)
     setChoice(value)
     onChange(value)
   }

@@ -64,8 +64,6 @@ const EditorPanel = ({ content, onUpdateContent }) => {
     }
   }
 
-  // console.log(content)
-
   return (
     <>
       <Overlay active={open} onClick={() => setOpen(false)} />
