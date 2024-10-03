@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import AppContext from '../../contexts/AppContext'
 import Dropdown from './Dropdown'
-import { IconExpand, IconContract, IconDownload } from "./Icons"
+import { IconExpand, IconContract, IconDownload, IconThreeDotLoader } from "./Icons"
 
 import downloadCode from '../../services/downloadCode'
 
@@ -13,7 +13,7 @@ const Button = ({ classes, onClick, children }) => {
   )
 }
 
-const DropdownContentDownload = ({ onDownload }) => {
+const DropdownContentDownload = ({ isProcessing, onDownload }) => {
   const nodeLink = 'https://nodejs.org/en/download/package-manager'
 
   return (
@@ -33,7 +33,11 @@ const DropdownContentDownload = ({ onDownload }) => {
           {`-> npm run dev\n`}
         </code>
       </pre>
-      <a className="download-code block cursor-pointer text-center w-full mt-4 text-base text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content-700 hover:text-background-700 hover:border-border/40 transition-all" onClick={onDownload}>Download</a>
+      <a className="download-code flex justify-center items-center cursor-pointer w-full mt-4 text-base text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content-700 hover:text-background-700 hover:border-border/40 transition-all"
+        onClick={onDownload}
+      >
+        {isProcessing ? <IconThreeDotLoader /> : 'Download'}
+      </a>
     </div>
   )
 }
@@ -41,10 +45,11 @@ const DropdownContentDownload = ({ onDownload }) => {
 const Header = ({ content }) => {
   const { fullscreen, toggleFullScreen, activePage } = useContext(AppContext)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const handleDownload = async (content) => {
-    if (isDownloading) return
-    setIsDownloading(true)
+    if (isDownloading || isProcessing) return
+    setIsProcessing(true)
 
     try {
       const data = await downloadCode(content)
@@ -72,6 +77,7 @@ const Header = ({ content }) => {
     } catch (error) {
       console.error(error)
     } finally {
+      setIsProcessing(false)
       setIsDownloading(false)
     }
   }
@@ -86,7 +92,7 @@ const Header = ({ content }) => {
           </div>
           <div className="flex gap-3">
             <Dropdown toogleComponent={<Button><IconDownload /></Button>}>
-              <DropdownContentDownload onDownload={() => handleDownload(content)} />
+              <DropdownContentDownload isProcessing={isProcessing} onDownload={() => handleDownload(content)} />
             </Dropdown>
           </div>
         </div>
