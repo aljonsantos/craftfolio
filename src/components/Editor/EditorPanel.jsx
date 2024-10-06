@@ -7,6 +7,7 @@ import Radio from './Radio.jsx'
 import Checkbox from './Checkbox.jsx'
 import Collapsible from './Collapsible.jsx'
 import ColorInput from './ColorInput.jsx'
+import { Swatch } from './ColorInput.jsx'
 
 const editorInputs = {
   pageType: [
@@ -69,7 +70,7 @@ const EditorPanel = ({ content, onUpdateContent }) => {
       <Overlay active={open} onClick={() => setOpen(false)} />
       <div className={`editor-panel bg-background ${ open ? 'open' : '' } border-solid border border-b-0 border-border/20 rounded-t-2xl pb-2 shadow-2xl shadow-black lg:w-[250px] lg:border lg:border-l-0 lg:shadow-none lg:rounded-none lg:rounded-r-2xl transition-transform duration-300`}>
         <PanelHeader open={open} togglePanel={() => setOpen(!open)} />
-      <div className="panel-body max-w-[500px] md:max-w-[700px] mx-auto text-sm overflow-y-scroll">
+      <div className="panel-body max-w-[500px] md:max-w-[700px] mx-auto text-sm overflow-y-auto">
         <PanelSection title="Navigation">
           <div className="section-body flex gap-5 lg:flex-col lg:gap-4">
             {editorInputs.pageType.map(input => (
@@ -97,7 +98,7 @@ const EditorPanel = ({ content, onUpdateContent }) => {
             <Checkbox id="contact" name="contact" value="contact" label="Contact" isChecked={content.pages.contact.enabled} onChange={handlePageChange} />
           </div>
         </PanelSection>
-        <PanelSection title="Colors" noSeparator>
+        <PanelSection title="Colors" titleRightEl={<Swatch />} noSeparator>
           <ColorInput color={content.color} onChange={handleColorChange} />
         </PanelSection>
       </div>

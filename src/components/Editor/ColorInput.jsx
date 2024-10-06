@@ -51,6 +51,19 @@ const ColorRange = ({ id, min = 0, max, value, onChange, background }) => {
   )
 }
 
+export const Swatch = () => {
+  return (
+    <div className="flex flex-row h-4 w-max rounded-full overflow-hidden mr-2">
+      <div className="w-2 rounded-full bg-accent-100" />
+      <div className="w-2 rounded-full bg-accent-200" />
+      <div className="w-2 rounded-full bg-accent-300" />
+      <div className="w-2 rounded-full bg-accent" />
+      <div className="w-2 rounded-full bg-accent-700" />
+      <div className="w-2 rounded-full bg-accent-800" />
+    </div>
+  )
+}
+
 const ColorInput = ({ color, onChange }) => {
   const { theme } = useContext(ThemeContext)
 
@@ -94,18 +107,6 @@ const ColorInput = ({ color, onChange }) => {
         <ColorRange id="lightness" min={20} max={80} value={lightness} onChange={handleLightnessChange}
           background={`linear-gradient(to right, hsl(${hue}, 60%, 20%) 0%, hsl(${hue}, 60%, 80%) 100%)`}
         />
-        {/* <div className="w-[200px] lg:w-[90%] pl-6 h-3">
-          <div className="w-full h-2 rounded-full" style={{
-            background: "linear-gradient(to right, #cc3333 0%, #cccc33 17%, #33cc33 33%, #33cccc 50%, #3333cc 67%, #cc33cc 83%, #cc3333 100%)"
-          }} />
-          <input id="hue" type="range" max={360} value={hue} onChange={handleHueChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
-        </div>
-        <div className="w-[200px] lg:w-[90%] pl-6 h-3">
-          <div className="w-full h-2 rounded-full" style={{
-            background: `linear-gradient(to right, hsl(${hue}, 60%, 20%) 0%, hsl(${hue}, 60%, 80%) 100%)`
-          }} />
-          <input id="lightness" type="range" min={20} max={80} value={lightness} onChange={handleLightnessChange} className="w-full relative -top-3 accent-accent appearance-none bg-transparent hover:accent-accent focus:accent-accent"/>
-        </div> */}
       </Collapsible>
     </div>
   )
