@@ -1,6 +1,9 @@
-const SectionTitle = ({ title }) => {
+const SectionTitle = ({ title, titleRightEl }) => {
   return (
-    <h3 className="text-content-700 font-semibold uppercase pb-5">{title}</h3>
+    <div className="flex items-center justify-between pb-5">
+      <h3 className="text-content-700 font-semibold uppercase">{title}</h3>
+      {titleRightEl}
+    </div>
   )
 }
 
