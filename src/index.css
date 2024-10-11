@@ -217,4 +217,12 @@ code {
   .main .section > * {
     padding: 0 24px;
   }
+
+  .editor-panel ::-webkit-scrollbar-track {
+    margin-bottom: 16px;
+  }
+  
+  .previewer::-webkit-scrollbar-track {
+    margin: 16px 0;
+  }
 }
