@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout the files
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@main
@@ -21,3 +21,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
+          SCRIPT_AFTER: |
+            npm install
+            echo $RSYNC_STDOUT
