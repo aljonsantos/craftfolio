@@ -22,8 +22,5 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
           SCRIPT_AFTER: |
-            echo 'Running commands in:'
             cd ${{ secrets.TARGET_DIR }}
-            pwd
             npm install
-            echo $RSYNC_STDOUT
