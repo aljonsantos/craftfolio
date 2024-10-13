@@ -3,6 +3,7 @@ import AppContext from '../../contexts/AppContext'
 import ThemeContext from '../../contexts/ThemeContext'
 import { getEnabledPages } from '../../hooks/useContentState'
 import { IconContrast } from './Icons'
+import Fade from './Fade'
 
 const Navbar = ({ content }) => {  
   const { fullscreen, activePage, setActivePage } = useContext(AppContext)
@@ -72,16 +73,18 @@ const Navbar = ({ content }) => {
   }, [content.page, fullscreen, setActivePage, enabledPages])
 
   let links = enabledPages.map(
-    page => <li key={page}><a href="" data-nav-section={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li>
+    page => <Fade key={page}><li><a href="" data-nav-section={page} onClick={handleClick} className={`${page === activePage ? 'active': ''} px-[1em] py-[.8em] inline-block rounded-full m-[1px] transition-all duration-500 hover:bg-accent-200 hover:text-accent-800 hover:font-semibold`}>{page}</a></li></Fade>
   )
 
   return (
-    <nav className={`navbar fixed md:sticky w-full ${fullscreen ? 'bottom-[24px]' : 'bottom-[80px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center items-center z-50 md:translate-y-0 md:opacity-100 lg:mb-6 transition-all duration-500`}>
+    <nav className={`navbar fixed md:sticky w-full ${fullscreen ? 'bottom-[24px]' : 'bottom-[80px]' } lg:bottom-[50px] left-0 md:top-[70px] flex justify-center items-center z-50 lg:mb-6`}>
       <ul className="flex border capitalize bg-background-700/10 backdrop-blur-xl backdrop-saturate-150 md:bg-background-700 text-[13px] md:text-[14px] text-accent-800 border-accent-100 rounded-3xl shadow-lg lg:shadow-xl lg:hover:scale-105 lg:active:scale-100 transition-transform duration-500">
         {links}
       </ul>
       <button className='border p-2 md:p-[10px] ml-3 md:ml-4 rounded-full bg-background-700/10 backdrop-blur-xl backdrop-saturate-150 md:bg-background-700 text-[13px] md:text-[14px] text-content-700 border-border/10 shadow-lg lg:shadow-xl lg:hover:scale-105 lg:active:scale-100' onClick={toggleTheme}>
-        <IconContrast />
+        <Fade>  
+          <IconContrast />
+        </Fade>
       </button>
     </nav>
   )

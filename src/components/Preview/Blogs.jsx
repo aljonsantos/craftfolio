@@ -20,7 +20,7 @@ const blogs = [
 
 const BlogList = ({ blog }) => {
   return (
-    <AccentComponent>
+    <AccentComponent fade={true}>
       <div className="flex flex-col gap-2 py-2 lg:px-4 lg:py-3">
         <BlogAttributes blog={blog} />
       </div>
@@ -30,7 +30,7 @@ const BlogList = ({ blog }) => {
 
 const BlogCard = ({ blog }) => {
   return (
-    <AccentComponent widthClass="w-full" border={false}>
+    <AccentComponent widthClass="w-full" border={false} fade={true}>
       <div className="flex flex-col gap-1 md:gap-2 rounded-2xl border border-accent-300/30 p-3 md:px-4 md:py-3 lg:px-5 lg:py-4 overflow-hidden">
         <BlogAttributes blog={blog} />
       </div>

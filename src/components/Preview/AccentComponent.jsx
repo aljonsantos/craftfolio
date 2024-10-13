@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import Fade from './Fade'
 
-const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', border = true, children }) => {
+const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', border = true, children, fade }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
   const [show, setShow] = useState(false)
   const ref = useRef(null)
@@ -39,8 +40,8 @@ const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', border
     }
   }, [])
 
-  return (
-    <div className={`accent relative inline overflow-clip ${widthClass} ${roundedClass} border border-transparent ${border ? 'lg:hover:border-accent-300/20' : ''}`} ref={ref}>
+  const content = (
+    <>
       <div
         className={`hidden lg:block ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-0'} absolute w-[200px] aspect-square bg-accent/50 saturate-150 blur-[124px] rounded-full z-40 pointer-events-none transition-opacity duration-500`}
         style={{
@@ -50,6 +51,12 @@ const AccentComponent = ({ roundedClass = 'rounded-2xl', widthClass = '', border
         }}
       />
       {children}
+    </>
+  )
+
+  return (
+    <div className={`accent relative inline overflow-clip ${widthClass} ${roundedClass} border border-transparent ${border ? 'lg:hover:border-accent-300/20' : ''}`} ref={ref}>
+      {fade? <Fade onceVisible={true}>{content}</Fade> : content}
     </div>
   )
 }
