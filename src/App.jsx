@@ -9,6 +9,7 @@ import Header from './components/Editor/Header'
 import Previewer from './components/Editor/Previewer'
 import EditorPanel from './components/Editor/EditorPanel'
 import Preview from './components/Preview/Preview'
+import Loader from './components/Preview/Loader'
 
 const App = () => {
   const { fullscreen } = useContext(AppContext)
@@ -20,15 +21,17 @@ const App = () => {
 
   return (
     <ThemeContextProvider>
-      <div className={`app ${fullscreen ? 'full' : ''}`}>
-        <div className="main-wrapper">
-          <Header content={content} />
-          {fullscreen
-            ? <Preview content={content} />
-            : <Previewer content={content} />}
+      <Loader>
+        <div className={`app ${fullscreen ? 'full' : ''}`}>
+          <div className="main-wrapper">
+            <Header content={content} />
+            {fullscreen
+              ? <Preview content={content} />
+              : <Previewer content={content} />}
+          </div>
+          <EditorPanel content={content} onUpdateContent={handleUpdateContent} />
         </div>
-        <EditorPanel content={content} onUpdateContent={handleUpdateContent} />
-      </div>
+      </Loader>
     </ThemeContextProvider>
   )
 }
