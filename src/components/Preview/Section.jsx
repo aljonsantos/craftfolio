@@ -1,15 +1,16 @@
 import Title from "./Title"
+import Fade from "./Fade"
 
 const Section = ({ title, classes, children }) => {
   const id = title.toLowerCase().split(" ").join("-")
 
   return (
-    <div id={id} className={`${classes} section pb-5 pt-3 lg:pb-7`}>
+    <Fade props={{ id, className: `${classes} section pb-5 pt-3 lg:pb-7` }}>
       <Title title={title} />
-      <div className="section-body">
+      <Fade props={{ className: 'section-body' }}>
         {children}
-      </div>
-    </div>
+      </Fade>
+    </Fade>
   )
 }
 
