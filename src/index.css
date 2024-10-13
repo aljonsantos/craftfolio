@@ -12,12 +12,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--clr-scrollbar);
+  @apply bg-accent;
   border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--clr-scrollbar-hover);
+  @apply bg-accent-700;
 }
 
 a, button, input, textarea {
@@ -139,6 +139,14 @@ code {
 .main .section .title,
 .main .section-body {
   padding: 0 24px;
+}
+
+.editor-panel ::-webkit-scrollbar-thumb {
+  background: var(--clr-scrollbar);
+}
+
+.editor-panel ::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-scrollbar-hover);
 }
 
 @media (min-width: 768px) {
