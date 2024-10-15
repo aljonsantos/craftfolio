@@ -50,7 +50,7 @@ const AboutMeCard = () => {
   const [showContacts, setShowContacts] = useState(false)
 
   return (
-    <div className="aboutme-card md:bg-background-700 flex flex-col gap-1 md:border border-accent-100 md:rounded-3xl md:gap-0 md:sticky md:top-[70px] md:shadow-lg lg:shadow-2xl">
+    <div className="aboutme-card md:bg-background-700 flex flex-col gap-1 md:border border-accent-100 md:rounded-3xl md:gap-0 md:sticky md:top-[85px] md:mt-[15px] md:shadow-lg lg:shadow-2xl">
       <div className="md:p-3 lg:p-4">
         <img src="/images/profile.jpg" className="rounded-3xl w-full mb-3 shadow-lg md:mb-0 border border-accent-100"/>
       </div>
