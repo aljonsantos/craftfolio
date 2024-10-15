@@ -7,7 +7,7 @@ import downloadCode from '../../services/downloadCode'
 
 const Button = ({ classes, onClick, children }) => {
   return (
-    <button className={`${classes} text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content-700 hover:text-background-700 hover:border-border/40 hover:scale-105 active:scale-100 transition-all`} onClick={onClick} >
+    <button className={`${classes} text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05] hover:bg-content-700/20 hover:text-content hover:border-border/40 hover:scale-105 active:scale-100 transition-all`} onClick={onClick} >
       {children}
     </button>
   )
@@ -33,7 +33,7 @@ const DropdownContentDownload = ({ isProcessing, onDownload }) => {
           {`-> npm run dev\n`}
         </code>
       </pre>
-      <a className="download-code flex justify-center items-center cursor-pointer w-full mt-4 text-base text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05]  hover:bg-content-700 hover:text-background-700 hover:border-border/40 transition-all"
+      <a className="download-code flex justify-center items-center cursor-pointer w-full mt-4 text-base text-content-700 border border-border/30 p-2 rounded-2xl bg-content/[0.05] hover:bg-content-700/20 hover:text-content hover:border-border/40 transition-all"
         onClick={onDownload}
       >
         {isProcessing ? <IconThreeDotLoader /> : 'Download'}
