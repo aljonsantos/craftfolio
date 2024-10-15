@@ -20,7 +20,7 @@ const items = [
 
 const Item = ({ title, school, location, date }) => {
   return (
-    <Fade onceVisible={true}>
+    <Fade onceVisible up>
       <p className="font-semibold text-accent-700 bg-accent/10 border border-accent-100/70 inline-block px-2 py-1 rounded-xl mb-1 md:mb-2 lg:mb-3 lg:px-3">{title}</p>
       <div className="pl-2">
         <p>{school}</p>
