@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
 ::-webkit-scrollbar {
   width: 3px;
   height: 0px;
@@ -92,7 +88,7 @@ code {
 }
 
 .navbar .active {
-  @apply font-semibold text-accent-800 bg-accent-200;
+  @apply font-semibold text-accent-800;
 }
 
 .main {
