@@ -9,7 +9,7 @@ const defaultContent = {
     },
     projects:{
       enabled: true,
-      layout: 'list'
+      layout: 'cards'
     },
     blog: {
       enabled: true,
@@ -22,8 +22,8 @@ const defaultContent = {
   color: {
     choice: 'default',
     accent: {
-      hue: 202,
-      lightness: 48
+      hue: 236,
+      lightness: 58
     }
   }
 }
